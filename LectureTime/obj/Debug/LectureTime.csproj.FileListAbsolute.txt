@@ -1,0 +1,10 @@
+D:\Desktop\LectureTime\LectureTime\bin\Debug\LectureTime.exe.config
+D:\Desktop\LectureTime\LectureTime\bin\Debug\LectureTime.exe
+D:\Desktop\LectureTime\LectureTime\bin\Debug\LectureTime.pdb
+D:\Desktop\LectureTime\LectureTime\obj\Debug\LectureTime.csprojAssemblyReference.cache
+D:\Desktop\LectureTime\LectureTime\obj\Debug\LectureTime.Form1.resources
+D:\Desktop\LectureTime\LectureTime\obj\Debug\LectureTime.Properties.Resources.resources
+D:\Desktop\LectureTime\LectureTime\obj\Debug\LectureTime.csproj.GenerateResource.cache
+D:\Desktop\LectureTime\LectureTime\obj\Debug\LectureTime.csproj.CoreCompileInputs.cache
+D:\Desktop\LectureTime\LectureTime\obj\Debug\LectureTime.exe
+D:\Desktop\LectureTime\LectureTime\obj\Debug\LectureTime.pdb
