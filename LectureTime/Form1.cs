@@ -14,12 +14,11 @@ using System.Windows.Forms;
 // startTime授業開始時間
 // endedTime授業狩猟時間
 // それぞれ上から順に記述していく
-//
-
 namespace LectureTime
 {
     public partial class Form1 : Form
     {
+        //授業時間の最大値の設定と時間の配列
         public const int MAX_TIMETABLE = 6;
         public static string[] StartTime =
         {
@@ -40,9 +39,9 @@ namespace LectureTime
             "19:40:00",
         };
 
+        //プログラムで使う変数類
         public int[] StartTimeValue = new int[MAX_TIMETABLE];
         public int[] EndedTimeValue = new int[MAX_TIMETABLE];
-
         public int[] LeftTimeValue = new int[MAX_TIMETABLE];
 
         int PeriodNumber = -1;
@@ -53,7 +52,7 @@ namespace LectureTime
         public Form1()
         {
             InitializeComponent();
-
+            //1秒ごとに呼び出すイベントを作るスレッドの定義
             eventHandleThread = new Thread(() =>
             {
                 DateTime dt, dtbf = DateTime.Now;
@@ -69,6 +68,7 @@ namespace LectureTime
                 }
             });
 
+            //文字列表記の時間を秒数に直してValueつき配列に格納
             for (int i = 0; i < MAX_TIMETABLE; i++)
             {
                 int j = ConvertToSeconds(StartTime[i]);
@@ -80,16 +80,19 @@ namespace LectureTime
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            //１秒スレッドの開始
             eventHandleThread.Start();
         }
 
         private void FormClosing_event(object sender, FormClosingEventArgs e)
         {
+            //１秒スレッドの破棄
             eventHandleThread.Abort();
         }
 
         private void everySeconds_event()
         {
+            //ローカル変数の定義
             DateTime dt = DateTime.Now;
             string dtstr = dt.ToString("HH:mm:ss"), StatusLabelStr;
             int ConvertedSeconds = ConvertToSeconds(dtstr);
@@ -98,6 +101,7 @@ namespace LectureTime
             int[] progSet = new int[3];
             string[] ButtomLabelText = new string[3];
             Color[] plogColor = new Color[2];
+
             if (PeriodNumber != -1)
             {
                 //授業時間中
@@ -106,22 +110,27 @@ namespace LectureTime
                 progSet[2] = ConvertedSeconds;
                 plogColor[0] = Color.Black;
                 plogColor[1] = Color.Red;
-                StatusLabelStr = "During the " + (PeriodNumber + 1).ToString() + " time period class!";
                 ButtomLabelText[0] = StartTime[PeriodNumber];
                 ButtomLabelText[1] = EndedTime[PeriodNumber];
                 ButtomLabelText[2] = ConvertToReturnTime(EndedTimeValue[PeriodNumber] - ConvertedSeconds);
+                StatusLabelStr = "During the " + (PeriodNumber + 1).ToString() + " time period class!";
             }
             else
             {
                 if (PeriodLeftNumber != -1)
                 {
                     //授業まであと何分
+                    int i = LeftTimeValue[PeriodLeftNumber];
+                    string str = ConvertToReturnTime(StartTimeValue[PeriodLeftNumber] - ConvertedSeconds);
                     progSet[0] = LeftTimeValue[PeriodLeftNumber];
                     progSet[1] = StartTimeValue[PeriodLeftNumber];
                     progSet[2] = ConvertedSeconds;
                     plogColor[0] = Color.Black;
                     plogColor[1] = Color.Yellow;
-                    StatusLabelStr = (StartTimeValue[PeriodLeftNumber] - ConvertedSeconds).ToString() + " Seconds left for start class!";
+                    ButtomLabelText[0] = ConvertToReturnTime(i);
+                    ButtomLabelText[1] = StartTime[PeriodLeftNumber];
+                    ButtomLabelText[2] = str;
+                    StatusLabelStr = str.Remove(0,3) + " times left for start class!";
                 }
                 else
                 {
@@ -131,11 +140,13 @@ namespace LectureTime
                     progSet[2] = 0;
                     plogColor[0] = Color.Blue;
                     plogColor[1] = Color.Red;
+                    for (int i = 0; i < ButtomLabelText.Length; i++)
+                        ButtomLabelText[i] = string.Empty;
                     StatusLabelStr = "Time without class!";
                 }
-                for (int i = 0; i < ButtomLabelText.Length; i++) 
-                    ButtomLabelText[i] = "";
+                
             }
+            //Formに反映
             progressBar1.Minimum = progSet[0];
             progressBar1.Maximum = progSet[1];
             progressBar1.Value = progSet[2];
@@ -148,6 +159,12 @@ namespace LectureTime
             leftTimeLabel.Text = ButtomLabelText[2];
         }
 
+        /// <summary>
+        /// strから秒に変換するメソッド
+        /// 
+        /// </summary>
+        /// <param 00:00:00の形式で入力="str"></param>
+        /// <returns></returns>
         private int ConvertToSeconds(string str)
         {
             string[] rawTime = str.Split(':');
@@ -157,6 +174,13 @@ namespace LectureTime
             return (int)allTime;
         }
 
+        /// <summary>
+        /// 時間割の時限を出すメソッド
+        /// </summary>
+        /// <param 今の時間="dt"></param>
+        /// <param 判定初めの時間="s"></param>
+        /// <param 判定終わりの時間="e"></param>
+        /// <returns></returns>
         public int CheckPeriodNumber(DateTime dt, int[] s, int[] e)
         {
             int buf = -1;
@@ -172,6 +196,11 @@ namespace LectureTime
             return buf;
         }
 
+        /// <summary>
+        /// 秒時間を00:00:00形式に戻す
+        /// </summary>
+        /// <param 秒数時間="time"></param>
+        /// <returns></returns>
         public string ConvertToReturnTime(int time)
         {
             TimeSpan span = new TimeSpan(0, 0, time);
