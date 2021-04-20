@@ -8,3 +8,13 @@ D:\Desktop\LectureTime\LectureTime\obj\Debug\LectureTime.csproj.GenerateResource
 D:\Desktop\LectureTime\LectureTime\obj\Debug\LectureTime.csproj.CoreCompileInputs.cache
 D:\Desktop\LectureTime\LectureTime\obj\Debug\LectureTime.exe
 D:\Desktop\LectureTime\LectureTime\obj\Debug\LectureTime.pdb
+C:\Users\keigo\Documents\GitHub\LectureTime\LectureTime\bin\Debug\LectureTime.exe.config
+C:\Users\keigo\Documents\GitHub\LectureTime\LectureTime\bin\Debug\LectureTime.exe
+C:\Users\keigo\Documents\GitHub\LectureTime\LectureTime\bin\Debug\LectureTime.pdb
+C:\Users\keigo\Documents\GitHub\LectureTime\LectureTime\obj\Debug\LectureTime.csprojAssemblyReference.cache
+C:\Users\keigo\Documents\GitHub\LectureTime\LectureTime\obj\Debug\LectureTime.Form1.resources
+C:\Users\keigo\Documents\GitHub\LectureTime\LectureTime\obj\Debug\LectureTime.Properties.Resources.resources
+C:\Users\keigo\Documents\GitHub\LectureTime\LectureTime\obj\Debug\LectureTime.csproj.GenerateResource.cache
+C:\Users\keigo\Documents\GitHub\LectureTime\LectureTime\obj\Debug\LectureTime.csproj.CoreCompileInputs.cache
+C:\Users\keigo\Documents\GitHub\LectureTime\LectureTime\obj\Debug\LectureTime.exe
+C:\Users\keigo\Documents\GitHub\LectureTime\LectureTime\obj\Debug\LectureTime.pdb

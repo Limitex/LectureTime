@@ -32,6 +32,10 @@ namespace LectureTime
             this.NowTimeFormLabel = new System.Windows.Forms.Label();
             this.NowTimeStatusLabel = new System.Windows.Forms.Label();
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
+            this.StartTimeLabel = new System.Windows.Forms.Label();
+            this.EndedTimeLabel = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.leftTimeLabel = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // NowTimeFormLabel
@@ -39,7 +43,7 @@ namespace LectureTime
             this.NowTimeFormLabel.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.NowTimeFormLabel.Font = new System.Drawing.Font("Consolas", 140.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.NowTimeFormLabel.ForeColor = System.Drawing.Color.White;
-            this.NowTimeFormLabel.Location = new System.Drawing.Point(12, 127);
+            this.NowTimeFormLabel.Location = new System.Drawing.Point(12, 113);
             this.NowTimeFormLabel.Name = "NowTimeFormLabel";
             this.NowTimeFormLabel.Size = new System.Drawing.Size(960, 239);
             this.NowTimeFormLabel.TabIndex = 0;
@@ -51,7 +55,7 @@ namespace LectureTime
             this.NowTimeStatusLabel.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.NowTimeStatusLabel.Font = new System.Drawing.Font("Consolas", 36F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.NowTimeStatusLabel.ForeColor = System.Drawing.Color.White;
-            this.NowTimeStatusLabel.Location = new System.Drawing.Point(12, 366);
+            this.NowTimeStatusLabel.Location = new System.Drawing.Point(12, 352);
             this.NowTimeStatusLabel.Name = "NowTimeStatusLabel";
             this.NowTimeStatusLabel.Size = new System.Drawing.Size(960, 95);
             this.NowTimeStatusLabel.TabIndex = 0;
@@ -69,12 +73,61 @@ namespace LectureTime
             this.progressBar1.Style = System.Windows.Forms.ProgressBarStyle.Continuous;
             this.progressBar1.TabIndex = 1;
             // 
+            // StartTimeLabel
+            // 
+            this.StartTimeLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.StartTimeLabel.AutoSize = true;
+            this.StartTimeLabel.Font = new System.Drawing.Font("Consolas", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.StartTimeLabel.ForeColor = System.Drawing.Color.White;
+            this.StartTimeLabel.Location = new System.Drawing.Point(12, 499);
+            this.StartTimeLabel.Name = "StartTimeLabel";
+            this.StartTimeLabel.Size = new System.Drawing.Size(135, 32);
+            this.StartTimeLabel.TabIndex = 2;
+            this.StartTimeLabel.Text = "00:00:00";
+            // 
+            // EndedTimeLabel
+            // 
+            this.EndedTimeLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.EndedTimeLabel.AutoSize = true;
+            this.EndedTimeLabel.Font = new System.Drawing.Font("Consolas", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.EndedTimeLabel.ForeColor = System.Drawing.Color.White;
+            this.EndedTimeLabel.Location = new System.Drawing.Point(837, 499);
+            this.EndedTimeLabel.Name = "EndedTimeLabel";
+            this.EndedTimeLabel.Size = new System.Drawing.Size(135, 32);
+            this.EndedTimeLabel.TabIndex = 2;
+            this.EndedTimeLabel.Text = "00:00:00";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(20, 360);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(35, 12);
+            this.label1.TabIndex = 3;
+            this.label1.Text = "label1";
+            // 
+            // leftTimeLabel
+            // 
+            this.leftTimeLabel.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.leftTimeLabel.AutoSize = true;
+            this.leftTimeLabel.Font = new System.Drawing.Font("Consolas", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.leftTimeLabel.ForeColor = System.Drawing.Color.White;
+            this.leftTimeLabel.Location = new System.Drawing.Point(406, 497);
+            this.leftTimeLabel.Name = "leftTimeLabel";
+            this.leftTimeLabel.Size = new System.Drawing.Size(159, 34);
+            this.leftTimeLabel.TabIndex = 4;
+            this.leftTimeLabel.Text = "00::00:00";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Black;
             this.ClientSize = new System.Drawing.Size(984, 561);
+            this.Controls.Add(this.leftTimeLabel);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.EndedTimeLabel);
+            this.Controls.Add(this.StartTimeLabel);
             this.Controls.Add(this.progressBar1);
             this.Controls.Add(this.NowTimeStatusLabel);
             this.Controls.Add(this.NowTimeFormLabel);
@@ -84,6 +137,7 @@ namespace LectureTime
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormClosing_event);
             this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -92,6 +146,10 @@ namespace LectureTime
         private System.Windows.Forms.Label NowTimeFormLabel;
         private System.Windows.Forms.Label NowTimeStatusLabel;
         private System.Windows.Forms.ProgressBar progressBar1;
+        private System.Windows.Forms.Label StartTimeLabel;
+        private System.Windows.Forms.Label EndedTimeLabel;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label leftTimeLabel;
     }
 }
 

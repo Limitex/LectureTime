@@ -43,7 +43,10 @@ namespace LectureTime
         public int[] StartTimeValue = new int[MAX_TIMETABLE];
         public int[] EndedTimeValue = new int[MAX_TIMETABLE];
 
+        public int[] LeftTimeValue = new int[MAX_TIMETABLE];
+
         int PeriodNumber = -1;
+        int PeriodLeftNumber = -1;
         Thread eventHandleThread;
         delegate void d();
 
@@ -68,8 +71,10 @@ namespace LectureTime
 
             for (int i = 0; i < MAX_TIMETABLE; i++)
             {
-                StartTimeValue[i] = ConvertToSeconds(StartTime[i]);
+                int j = ConvertToSeconds(StartTime[i]);
+                StartTimeValue[i] = j;
                 EndedTimeValue[i] = ConvertToSeconds(EndedTime[i]);
+                LeftTimeValue[i] = j - 600;
             }
         }
 
@@ -88,26 +93,59 @@ namespace LectureTime
             DateTime dt = DateTime.Now;
             string dtstr = dt.ToString("HH:mm:ss"), StatusLabelStr;
             int ConvertedSeconds = ConvertToSeconds(dtstr);
-            PeriodNumber = CheckPeriodNumber(dt);
-
+            PeriodNumber = CheckPeriodNumber(dt, StartTimeValue, EndedTimeValue);
+            PeriodLeftNumber = CheckPeriodNumber(dt, LeftTimeValue, StartTimeValue);
+            int[] progSet = new int[3];
+            string[] ButtomLabelText = new string[3];
+            Color[] plogColor = new Color[2];
             if (PeriodNumber != -1)
             {
-                progressBar1.Minimum = StartTimeValue[PeriodNumber];
-                progressBar1.Maximum = EndedTimeValue[PeriodNumber];
-                progressBar1.Value = ConvertedSeconds;
+                //授業時間中
+                progSet[0] = StartTimeValue[PeriodNumber];
+                progSet[1] = EndedTimeValue[PeriodNumber];
+                progSet[2] = ConvertedSeconds;
+                plogColor[0] = Color.Black;
+                plogColor[1] = Color.Red;
                 StatusLabelStr = "During the " + (PeriodNumber + 1).ToString() + " time period class!";
-                progressBar1.BackColor = Color.Black;
+                ButtomLabelText[0] = StartTime[PeriodNumber];
+                ButtomLabelText[1] = EndedTime[PeriodNumber];
+                ButtomLabelText[2] = ConvertToReturnTime(EndedTimeValue[PeriodNumber] - ConvertedSeconds);
             }
             else
             {
-                progressBar1.Minimum = 0;
-                progressBar1.Maximum = 0;
-                progressBar1.Value = 0;
-                StatusLabelStr = "Time without class!";
-                progressBar1.BackColor = Color.Blue;
+                if (PeriodLeftNumber != -1)
+                {
+                    //授業まであと何分
+                    progSet[0] = LeftTimeValue[PeriodLeftNumber];
+                    progSet[1] = StartTimeValue[PeriodLeftNumber];
+                    progSet[2] = ConvertedSeconds;
+                    plogColor[0] = Color.Black;
+                    plogColor[1] = Color.Yellow;
+                    StatusLabelStr = (StartTimeValue[PeriodLeftNumber] - ConvertedSeconds).ToString() + " Seconds left for start class!";
+                }
+                else
+                {
+                    //授業時間外
+                    progSet[0] = 0;
+                    progSet[1] = 0;
+                    progSet[2] = 0;
+                    plogColor[0] = Color.Blue;
+                    plogColor[1] = Color.Red;
+                    StatusLabelStr = "Time without class!";
+                }
+                for (int i = 0; i < ButtomLabelText.Length; i++) 
+                    ButtomLabelText[i] = "";
             }
+            progressBar1.Minimum = progSet[0];
+            progressBar1.Maximum = progSet[1];
+            progressBar1.Value = progSet[2];
+            progressBar1.BackColor = plogColor[0];
+            progressBar1.ForeColor = plogColor[1];
             NowTimeStatusLabel.Text = StatusLabelStr;
             NowTimeFormLabel.Text = dtstr;
+            StartTimeLabel.Text = ButtomLabelText[0];
+            EndedTimeLabel.Text = ButtomLabelText[1];
+            leftTimeLabel.Text = ButtomLabelText[2];
         }
 
         private int ConvertToSeconds(string str)
@@ -119,19 +157,25 @@ namespace LectureTime
             return (int)allTime;
         }
 
-        public int CheckPeriodNumber(DateTime dt)
+        public int CheckPeriodNumber(DateTime dt, int[] s, int[] e)
         {
             int buf = -1;
             for (int i = 0; i < MAX_TIMETABLE; i++)
             {
                 int j = ConvertToSeconds(dt.ToString("HH:mm:ss"));
-                if (StartTimeValue[i] <= j && j <= EndedTimeValue[i])
+                if (s[i] <= j && j <= e[i])
                 {
                     buf = i;
                     break;
                 }
             }
             return buf;
+        }
+
+        public string ConvertToReturnTime(int time)
+        {
+            TimeSpan span = new TimeSpan(0, 0, time);
+            return span.ToString(@"hh\:mm\:ss");
         }
     }
 }
