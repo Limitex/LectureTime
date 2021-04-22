@@ -33,6 +33,7 @@ namespace LectureTime
 
     public static class DefaultData
     {
+
         public static readonly string READ_FILE =
             "[LectureTimeData Version 1.0]\n\n" +
             "[MaxTimetable]\n" +
@@ -54,6 +55,8 @@ namespace LectureTime
             "18:00:00\n" +
             "19:40:00\n" +
             "[EndedTimeEnd]\n";
+
+        //変更不可
         public static readonly string[] CHECK_STR = 
         { 
             "[LectureTimeData Version 1.0]",

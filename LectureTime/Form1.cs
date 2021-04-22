@@ -20,9 +20,9 @@ namespace LectureTime
     public partial class Form1 : Form
     {
         //プログラムで使う変数類
-        public int[] StartTimeValue = new int[SettingValue.MaxTimetable];
-        public int[] EndedTimeValue = new int[SettingValue.MaxTimetable];
-        public int[] LeftTimeValue = new int[SettingValue.MaxTimetable];
+        public int[] StartTimeValue;
+        public int[] EndedTimeValue;
+        public int[] LeftTimeValue;
 
         int PeriodNumber = -1;
         int PeriodLeftNumber = -1;
@@ -58,15 +58,14 @@ namespace LectureTime
             SettingValue.MaxTimetable = int.Parse(Data[FindIndex(Data, DefaultData.CHECK_STR[1]) + 1]);
             SettingValue.StartTime = new string[SettingValue.MaxTimetable];
             SettingValue.EndedTime = new string[SettingValue.MaxTimetable];
-
-            string[] dataBuffer = new string[SettingValue.MaxTimetable];
-            for (int i = 0;i < 10; i++)
+            StartTimeValue = new int[SettingValue.MaxTimetable];
+            EndedTimeValue = new int[SettingValue.MaxTimetable];
+            LeftTimeValue = new int[SettingValue.MaxTimetable];
+            for (int i = 0;i < SettingValue.MaxTimetable; i++)
             {
-
+                SettingValue.StartTime[i] = Data[FindIndex(Data, DefaultData.CHECK_STR[3]) + 1 + i];
+                SettingValue.EndedTime[i] = Data[FindIndex(Data, DefaultData.CHECK_STR[5]) + 1 + i];
             }
-
-
-
 
             //1秒ごとに呼び出すイベントを作るスレッドの定義
             eventHandleThread = new Thread(() =>
@@ -261,7 +260,7 @@ namespace LectureTime
         {
 
             int index = -1;
-            for (int i = 0; i < DefaultData.CHECK_STR.Length; i++)
+            for (int i = 0; i < vs.Length; i++)
             {
                 if (vs[i].Contains(FindStr))
                 {
