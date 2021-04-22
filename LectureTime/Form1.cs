@@ -20,9 +20,9 @@ namespace LectureTime
     public partial class Form1 : Form
     {
         //プログラムで使う変数類
-        public int[] StartTimeValue;
-        public int[] EndedTimeValue;
-        public int[] LeftTimeValue;
+        public static int[] StartTimeValue;
+        public static int[] EndedTimeValue;
+        public static int[] LeftTimeValue;
 
         int PeriodNumber = -1;
         int PeriodLeftNumber = -1;
@@ -50,22 +50,8 @@ namespace LectureTime
                     break;
                 }
             }
-            //ファイルデータをDataに分割していれる
-            string[] Data = new string[CountChar(DataFileData,'\n')];
-            Data = DataFileData.Split('\n');
-
-            //使用時間と最大値の定義
-            SettingValue.MaxTimetable = int.Parse(Data[FindIndex(Data, DefaultData.CHECK_STR[1]) + 1]);
-            SettingValue.StartTime = new string[SettingValue.MaxTimetable];
-            SettingValue.EndedTime = new string[SettingValue.MaxTimetable];
-            StartTimeValue = new int[SettingValue.MaxTimetable];
-            EndedTimeValue = new int[SettingValue.MaxTimetable];
-            LeftTimeValue = new int[SettingValue.MaxTimetable];
-            for (int i = 0;i < SettingValue.MaxTimetable; i++)
-            {
-                SettingValue.StartTime[i] = Data[FindIndex(Data, DefaultData.CHECK_STR[3]) + 1 + i];
-                SettingValue.EndedTime[i] = Data[FindIndex(Data, DefaultData.CHECK_STR[5]) + 1 + i];
-            }
+            
+            SettingValue.Setting(DataFileData);
 
             //1秒ごとに呼び出すイベントを作るスレッドの定義
             eventHandleThread = new Thread(() =>
@@ -227,18 +213,10 @@ namespace LectureTime
             TimeSpan span = new TimeSpan(0, 0, time);
             return span.ToString(@"hh\:mm\:ss");
         }
-        /// <summary>
-        /// 文字の出現回数をカウント
-        /// </summary>
-        /// <param 対象文字列="s"></param>
-        /// <param 探す文字="c"></param>
-        /// <returns></returns>
-        // 文字の出現回数をカウント
-        public static int CountChar(string s, char c)
-        {
-            return s.Length - s.Replace(c.ToString(), "").Length;
-        }
 
+        /// <summary>
+        /// 新しいデータファイルを作る
+        /// </summary>
         public static void MakeFile()
         {
             using (var sr = new StreamWriter(SettingValue.DATA_FILE_PATH, false, SettingValue.ENCODING))
@@ -246,6 +224,11 @@ namespace LectureTime
                 sr.WriteLine(DefaultData.READ_FILE);
             }
         }
+
+        /// <summary>
+        /// 既存のデータファイルを読み込む
+        /// </summary>
+        /// <returns></returns>
         public static string ReadFile()
         {
             string DataFileData;
@@ -254,21 +237,6 @@ namespace LectureTime
                 DataFileData = sr.ReadToEnd();
             }
             return DataFileData;
-        }
-
-        public static int FindIndex(string[] vs,string FindStr)
-        {
-
-            int index = -1;
-            for (int i = 0; i < vs.Length; i++)
-            {
-                if (vs[i].Contains(FindStr))
-                {
-                    index = i;
-                    break;
-                }
-            }
-            return index;
         }
     }
 }

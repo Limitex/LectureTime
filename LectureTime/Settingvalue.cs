@@ -11,26 +11,51 @@ namespace LectureTime
         public static int MaxTimetable = -1;
         public static readonly string DATA_FILE_PATH = @"lectureTime.ltdata";
         public static readonly Encoding ENCODING = Encoding.GetEncoding("UTF-8");
-        public static string[] StartTime/* =
+        public static string[] StartTime;
+        public static string[] EndedTime;
+
+        public static void Setting(string inData)
         {
-            "8:30:00",
-            "10:10:00",
-            "13:10:00",
-            "14:50:00",
-            "16:30:00",
-            "18:10:00"
-        }*/;
-        public static string[] EndedTime/* =
+            string[] Data = inData.Split('\n');
+
+            //使用時間と最大値の定義と配列の初期化
+            MaxTimetable = int.Parse(Data[FindIndex(Data, DefaultData.CHECK_STR[1]) + 1]);
+            StartTime = new string[MaxTimetable];
+            EndedTime = new string[MaxTimetable];
+            Form1.StartTimeValue = new int[MaxTimetable];
+            Form1.EndedTimeValue = new int[MaxTimetable];
+            Form1.LeftTimeValue = new int[MaxTimetable];
+
+            //使用時間の定義
+            for (int i = 0; i < MaxTimetable; i++)
+            {
+                StartTime[i] = Data[FindIndex(Data, DefaultData.CHECK_STR[3]) + 1 + i];
+                EndedTime[i] = Data[FindIndex(Data, DefaultData.CHECK_STR[5]) + 1 + i];
+            }
+        }
+        /// <summary>
+        /// 文字列が配列のどこに入っているかを調べる
+        /// 見つからなかった場合は-1を返す
+        /// </summary>
+        /// <param 対象の文字列="vs"></param>
+        /// <param 探す文字列="FindStr"></param>
+        /// <returns></returns>
+        private static int FindIndex(string[] vs, string FindStr)
         {
-            "10:00:00",
-            "11:40:00",
-            "14:40:00",
-            "16:20:00",
-            "18:00:00",
-            "19:40:00",
-        }*/;
+            int index = -1;
+            for (int i = 0; i < vs.Length; i++)
+            {
+                if (vs[i].Contains(FindStr))
+                {
+                    index = i;
+                    break;
+                }
+            }
+            return index;
+        }
     }
 
+    //変更不可
     public static class DefaultData
     {
 
@@ -55,8 +80,6 @@ namespace LectureTime
             "18:00:00\n" +
             "19:40:00\n" +
             "[EndedTimeEnd]\n";
-
-        //変更不可
         public static readonly string[] CHECK_STR = 
         { 
             "[LectureTimeData Version 1.0]",
@@ -66,6 +89,6 @@ namespace LectureTime
             "[StartTimeEnd]",
             "[EndedTime]",
             "[EndedTimeEnd]"
-    };
+        };
     }
 }
