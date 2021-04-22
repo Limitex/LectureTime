@@ -20,10 +20,9 @@ namespace LectureTime
     public partial class Form1 : Form
     {
         //プログラムで使う変数類
-        public int[] StartTimeValue = new int[SettingValue.MAX_TIMETABLE];
-        public int[] EndedTimeValue = new int[SettingValue.MAX_TIMETABLE];
-        public int[] LeftTimeValue = new int[SettingValue.MAX_TIMETABLE];
-
+        public int[] StartTimeValue = new int[SettingValue.MaxTimetable];
+        public int[] EndedTimeValue = new int[SettingValue.MaxTimetable];
+        public int[] LeftTimeValue = new int[SettingValue.MaxTimetable];
 
         int PeriodNumber = -1;
         int PeriodLeftNumber = -1;
@@ -34,19 +33,41 @@ namespace LectureTime
         {
             InitializeComponent();
 
-            //ファイルを読み込む処理と見つからなかった場合はファイルを作る処理
-            if (File.Exists(SettingValue.DATA_FILE_PATH))
+            //ファイルが見つからなかった場合はファイルを作る処理
+            if (!File.Exists(SettingValue.DATA_FILE_PATH))
             {
-                //ファイル見つかった
-                MessageBox.Show("File found");
+                MakeFile();
             }
-            else
+
+            //ファイルが正しくなかったら作りなおす処理
+            string DataFileData = ReadFile();
+            foreach (string sr in DefaultData.CHECK_STR)
             {
-                MessageBox.Show("File not found");
-                File.Create(SettingValue.DATA_FILE_PATH);
-                //ファイルみつからん
+                if (!DataFileData.Contains(sr))
+                {
+                    MakeFile();
+                    DataFileData = ReadFile();
+                    break;
+                }
             }
-            
+            //ファイルデータをDataに分割していれる
+            string[] Data = new string[CountChar(DataFileData,'\n')];
+            Data = DataFileData.Split('\n');
+
+            //使用時間と最大値の定義
+            SettingValue.MaxTimetable = int.Parse(Data[FindIndex(Data, DefaultData.CHECK_STR[1]) + 1]);
+            SettingValue.StartTime = new string[SettingValue.MaxTimetable];
+            SettingValue.EndedTime = new string[SettingValue.MaxTimetable];
+
+            string[] dataBuffer = new string[SettingValue.MaxTimetable];
+            for (int i = 0;i < 10; i++)
+            {
+
+            }
+
+
+
+
             //1秒ごとに呼び出すイベントを作るスレッドの定義
             eventHandleThread = new Thread(() =>
             {
@@ -64,7 +85,7 @@ namespace LectureTime
             });
 
             //文字列表記の時間を秒数に直してValueつき配列に格納
-            for (int i = 0; i < SettingValue.MAX_TIMETABLE; i++)
+            for (int i = 0; i < SettingValue.MaxTimetable; i++)
             {
                 int j = ConvertToSeconds(SettingValue.StartTime[i]);
                 StartTimeValue[i] = j;
@@ -185,7 +206,7 @@ namespace LectureTime
         public int CheckPeriodNumber(DateTime dt, int[] s, int[] e)
         {
             int buf = -1;
-            for (int i = 0; i < SettingValue.MAX_TIMETABLE; i++)
+            for (int i = 0; i < SettingValue.MaxTimetable; i++)
             {
                 int j = ConvertToSeconds(dt.ToString("HH:mm:ss"));
                 if (s[i] <= j && j <= e[i])
@@ -206,6 +227,49 @@ namespace LectureTime
         {
             TimeSpan span = new TimeSpan(0, 0, time);
             return span.ToString(@"hh\:mm\:ss");
+        }
+        /// <summary>
+        /// 文字の出現回数をカウント
+        /// </summary>
+        /// <param 対象文字列="s"></param>
+        /// <param 探す文字="c"></param>
+        /// <returns></returns>
+        // 文字の出現回数をカウント
+        public static int CountChar(string s, char c)
+        {
+            return s.Length - s.Replace(c.ToString(), "").Length;
+        }
+
+        public static void MakeFile()
+        {
+            using (var sr = new StreamWriter(SettingValue.DATA_FILE_PATH, false, SettingValue.ENCODING))
+            {
+                sr.WriteLine(DefaultData.READ_FILE);
+            }
+        }
+        public static string ReadFile()
+        {
+            string DataFileData;
+            using (var sr = new StreamReader(SettingValue.DATA_FILE_PATH))
+            {
+                DataFileData = sr.ReadToEnd();
+            }
+            return DataFileData;
+        }
+
+        public static int FindIndex(string[] vs,string FindStr)
+        {
+
+            int index = -1;
+            for (int i = 0; i < DefaultData.CHECK_STR.Length; i++)
+            {
+                if (vs[i].Contains(FindStr))
+                {
+                    index = i;
+                    break;
+                }
+            }
+            return index;
         }
     }
 }
