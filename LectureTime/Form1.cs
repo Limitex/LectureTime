@@ -19,33 +19,11 @@ namespace LectureTime
 {
     public partial class Form1 : Form
     {
-        //授業時間の最大値の設定と時間の配列
-        public const int MAX_TIMETABLE = 6;
-        public static string[] StartTime =
-        {
-            "8:30:00",
-            "10:10:00",
-            "13:10:00",
-            "14:50:00",
-            "16:30:00",
-            "18:10:00"
-        };
-        public static string[] EndedTime =
-        {
-            "10:00:00",
-            "11:40:00",
-            "14:40:00",
-            "16:20:00",
-            "18:00:00",
-            "19:40:00",
-        };
-
         //プログラムで使う変数類
-        public int[] StartTimeValue = new int[MAX_TIMETABLE];
-        public int[] EndedTimeValue = new int[MAX_TIMETABLE];
-        public int[] LeftTimeValue = new int[MAX_TIMETABLE];
+        public int[] StartTimeValue = new int[SettingValue.MAX_TIMETABLE];
+        public int[] EndedTimeValue = new int[SettingValue.MAX_TIMETABLE];
+        public int[] LeftTimeValue = new int[SettingValue.MAX_TIMETABLE];
 
-        public string dataFilePath = @"lectureTime.ltdata";
 
         int PeriodNumber = -1;
         int PeriodLeftNumber = -1;
@@ -57,12 +35,15 @@ namespace LectureTime
             InitializeComponent();
 
             //ファイルを読み込む処理と見つからなかった場合はファイルを作る処理
-            if (File.Exists(dataFilePath))
+            if (File.Exists(SettingValue.DATA_FILE_PATH))
             {
                 //ファイル見つかった
+                MessageBox.Show("File found");
             }
             else
             {
+                MessageBox.Show("File not found");
+                File.Create(SettingValue.DATA_FILE_PATH);
                 //ファイルみつからん
             }
             
@@ -83,11 +64,11 @@ namespace LectureTime
             });
 
             //文字列表記の時間を秒数に直してValueつき配列に格納
-            for (int i = 0; i < MAX_TIMETABLE; i++)
+            for (int i = 0; i < SettingValue.MAX_TIMETABLE; i++)
             {
-                int j = ConvertToSeconds(StartTime[i]);
+                int j = ConvertToSeconds(SettingValue.StartTime[i]);
                 StartTimeValue[i] = j;
-                EndedTimeValue[i] = ConvertToSeconds(EndedTime[i]);
+                EndedTimeValue[i] = ConvertToSeconds(SettingValue.EndedTime[i]);
                 LeftTimeValue[i] = j - 600;
             }
         }
@@ -100,7 +81,8 @@ namespace LectureTime
 
         private void setteiToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            Form2 form2 = new Form2();
+            form2.Show();
         }
 
         private void FormClosing_event(object sender, FormClosingEventArgs e)
@@ -129,8 +111,8 @@ namespace LectureTime
                 progSet[2] = ConvertedSeconds;
                 plogColor[0] = Color.Black;
                 plogColor[1] = Color.Red;
-                ButtomLabelText[0] = StartTime[PeriodNumber];
-                ButtomLabelText[1] = EndedTime[PeriodNumber];
+                ButtomLabelText[0] = SettingValue.StartTime[PeriodNumber];
+                ButtomLabelText[1] = SettingValue.EndedTime[PeriodNumber];
                 ButtomLabelText[2] = ConvertToReturnTime(EndedTimeValue[PeriodNumber] - ConvertedSeconds);
                 StatusLabelStr = "During the " + (PeriodNumber + 1).ToString() + " time period class!";
             }
@@ -147,7 +129,7 @@ namespace LectureTime
                     plogColor[0] = Color.Black;
                     plogColor[1] = Color.Yellow;
                     ButtomLabelText[0] = ConvertToReturnTime(i);
-                    ButtomLabelText[1] = StartTime[PeriodLeftNumber];
+                    ButtomLabelText[1] = SettingValue.StartTime[PeriodLeftNumber];
                     ButtomLabelText[2] = str;
                     StatusLabelStr = str.Remove(0,3) + " times left for start class!";
                 }
@@ -203,7 +185,7 @@ namespace LectureTime
         public int CheckPeriodNumber(DateTime dt, int[] s, int[] e)
         {
             int buf = -1;
-            for (int i = 0; i < MAX_TIMETABLE; i++)
+            for (int i = 0; i < SettingValue.MAX_TIMETABLE; i++)
             {
                 int j = ConvertToSeconds(dt.ToString("HH:mm:ss"));
                 if (s[i] <= j && j <= e[i])

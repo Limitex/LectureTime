@@ -8,3 +8,4 @@ C:\Users\keigo\Documents\GitHub\LectureTime\LectureTime\obj\Debug\LectureTime.cs
 C:\Users\keigo\Documents\GitHub\LectureTime\LectureTime\obj\Debug\LectureTime.csproj.CoreCompileInputs.cache
 C:\Users\keigo\Documents\GitHub\LectureTime\LectureTime\obj\Debug\LectureTime.exe
 C:\Users\keigo\Documents\GitHub\LectureTime\LectureTime\obj\Debug\LectureTime.pdb
+C:\Users\keigo\Documents\GitHub\LectureTime\LectureTime\obj\Debug\LectureTime.Form2.resources
