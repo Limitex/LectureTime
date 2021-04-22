@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -44,6 +45,8 @@ namespace LectureTime
         public int[] EndedTimeValue = new int[MAX_TIMETABLE];
         public int[] LeftTimeValue = new int[MAX_TIMETABLE];
 
+        public string dataFilePath = @"lectureTime.ltdata";
+
         int PeriodNumber = -1;
         int PeriodLeftNumber = -1;
         Thread eventHandleThread;
@@ -52,6 +55,17 @@ namespace LectureTime
         public Form1()
         {
             InitializeComponent();
+
+            //ファイルを読み込む処理と見つからなかった場合はファイルを作る処理
+            if (File.Exists(dataFilePath))
+            {
+                //ファイル見つかった
+            }
+            else
+            {
+                //ファイルみつからん
+            }
+            
             //1秒ごとに呼び出すイベントを作るスレッドの定義
             eventHandleThread = new Thread(() =>
             {
@@ -82,6 +96,11 @@ namespace LectureTime
         {
             //１秒スレッドの開始
             eventHandleThread.Start();
+        }
+
+        private void setteiToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
         }
 
         private void FormClosing_event(object sender, FormClosingEventArgs e)
