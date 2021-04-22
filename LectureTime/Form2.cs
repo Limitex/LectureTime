@@ -16,5 +16,20 @@ namespace LectureTime
         {
             InitializeComponent();
         }
+
+        private void OK_Button_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Cancel_Button_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void App_Button_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
