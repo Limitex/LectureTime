@@ -9,22 +9,52 @@ namespace LectureTime
     static class SettingValue
     {
         public static int MaxTimetable = -1;
+        public static readonly int MAX_PERIOD = 10;
+        public static readonly int MAX_WEEK = 7;
         public static readonly string DATA_FILE_PATH = @"lectureTime.ltdata";
         public static readonly Encoding ENCODING = Encoding.GetEncoding("UTF-8");
         public static string[] StartTime;
         public static string[] EndedTime;
+        public static int[,] periodCheckData = new int[MAX_PERIOD, MAX_WEEK];
 
         public static void Setting(string inData)
         {
+
             string[] Data = inData.Split('\n');
 
             //使用時間と最大値の定義と配列の初期化
             MaxTimetable = int.Parse(Data[FindIndex(Data, DefaultData.CHECK_STR[1]) + 1]);
             StartTime = new string[MaxTimetable];
             EndedTime = new string[MaxTimetable];
+
+            //値に変換するときに使う配列の初期化
             Form1.StartTimeValue = new int[MaxTimetable];
             Form1.EndedTimeValue = new int[MaxTimetable];
             Form1.LeftTimeValue = new int[MaxTimetable];
+
+            //チェックデータの作成
+            int x = FindIndex(Data, DefaultData.CHECK_STR[7]) + 1;
+            for (int i = 0; i < MAX_PERIOD; i++)
+            {
+                string weekData = Data[x + i];
+
+                for (int j = 0; j < MAX_WEEK; j++)
+                {
+                    int val = int.Parse(weekData[j].ToString());
+                    if (val == 0)
+                    {
+                        periodCheckData[i, j] = 0;
+                    }
+                    if (val == 1)
+                    {
+                        periodCheckData[i, j] = 1;
+                    }
+                    if (MaxTimetable <= i)
+                    {
+                        periodCheckData[i, j] = -1;
+                    }
+                }
+            }
 
             //使用時間の定義
             for (int i = 0; i < MaxTimetable; i++)
@@ -79,7 +109,20 @@ namespace LectureTime
             "16:20:00\n" +
             "18:00:00\n" +
             "19:40:00\n" +
-            "[EndedTimeEnd]\n";
+            "[EndedTimeEnd]\n\n" +
+            "[DateSetData]\n" +
+            "1111111\n" +
+            "1111111\n" +
+            "1111111\n" +
+            "1111111\n" +
+            "1111111\n" +
+            "1111111\n" +
+            "0000000\n" +
+            "0000000\n" +
+            "0000000\n" +
+            "0000000\n" +
+            "[DateSetDataEnd]";
+
         public static readonly string[] CHECK_STR = 
         { 
             "[LectureTimeData Version 1.0]",
@@ -88,7 +131,9 @@ namespace LectureTime
             "[StartTime]",
             "[StartTimeEnd]",
             "[EndedTime]",
-            "[EndedTimeEnd]"
+            "[EndedTimeEnd]",
+            "[DateSetData]",
+            "[DateSetDataEnd]"
         };
     }
 }
