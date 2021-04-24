@@ -69,27 +69,29 @@ namespace LectureTime
                 }
             }
 
-            periodEnableCheck1.Checked = SettingValue.MaxTimetable >= 1;
-            periodEnableCheck2.Checked = SettingValue.MaxTimetable >= 2;
-            periodEnableCheck3.Checked = SettingValue.MaxTimetable >= 3;
-            periodEnableCheck4.Checked = SettingValue.MaxTimetable >= 4;
-            periodEnableCheck5.Checked = SettingValue.MaxTimetable >= 5;
-            periodEnableCheck6.Checked = SettingValue.MaxTimetable >= 6;
-            periodEnableCheck7.Checked = SettingValue.MaxTimetable >= 7;
-            periodEnableCheck8.Checked = SettingValue.MaxTimetable >= 8;
-            periodEnableCheck9.Checked = SettingValue.MaxTimetable >= 9;
-            periodEnableCheck10.Checked = SettingValue.MaxTimetable >= 10;
+            {
+                periodEnableCheck1.Checked = SettingValue.MaxTimetable >= 1;
+                periodEnableCheck2.Checked = SettingValue.MaxTimetable >= 2;
+                periodEnableCheck3.Checked = SettingValue.MaxTimetable >= 3;
+                periodEnableCheck4.Checked = SettingValue.MaxTimetable >= 4;
+                periodEnableCheck5.Checked = SettingValue.MaxTimetable >= 5;
+                periodEnableCheck6.Checked = SettingValue.MaxTimetable >= 6;
+                periodEnableCheck7.Checked = SettingValue.MaxTimetable >= 7;
+                periodEnableCheck8.Checked = SettingValue.MaxTimetable >= 8;
+                periodEnableCheck9.Checked = SettingValue.MaxTimetable >= 9;
+                periodEnableCheck10.Checked = SettingValue.MaxTimetable >= 10;
 
-            PeriodGroup1.Enabled = periodEnableCheck1.Checked;
-            PeriodGroup2.Enabled = periodEnableCheck2.Checked;
-            PeriodGroup3.Enabled = periodEnableCheck3.Checked;
-            PeriodGroup4.Enabled = periodEnableCheck4.Checked;
-            PeriodGroup5.Enabled = periodEnableCheck5.Checked;
-            PeriodGroup6.Enabled = periodEnableCheck6.Checked;
-            PeriodGroup7.Enabled = periodEnableCheck7.Checked;
-            PeriodGroup8.Enabled = periodEnableCheck8.Checked;
-            PeriodGroup9.Enabled = periodEnableCheck9.Checked;
-            PeriodGroup10.Enabled = periodEnableCheck10.Checked;
+                PeriodGroup1.Enabled = periodEnableCheck1.Checked;
+                PeriodGroup2.Enabled = periodEnableCheck2.Checked;
+                PeriodGroup3.Enabled = periodEnableCheck3.Checked;
+                PeriodGroup4.Enabled = periodEnableCheck4.Checked;
+                PeriodGroup5.Enabled = periodEnableCheck5.Checked;
+                PeriodGroup6.Enabled = periodEnableCheck6.Checked;
+                PeriodGroup7.Enabled = periodEnableCheck7.Checked;
+                PeriodGroup8.Enabled = periodEnableCheck8.Checked;
+                PeriodGroup9.Enabled = periodEnableCheck9.Checked;
+                PeriodGroup10.Enabled = periodEnableCheck10.Checked;
+            } // チェックの準備と実行
 
             //チェックボックスに記述
             for (int i = 0; i < SettingValue.MAX_PERIOD; i++)
@@ -261,7 +263,10 @@ namespace LectureTime
 
         private void OK_Button_Click(object sender, EventArgs e)
         {
-            Save(true);
+            if (Save(true))
+            {
+                Close();
+            }
         }
 
         private void Cancel_Button_Click(object sender, EventArgs e)
@@ -274,13 +279,87 @@ namespace LectureTime
             Save(false);
         }
 
-        private void Save(bool close)
+        private bool Save(bool close)
         {
-            var i = MessageBox.Show("Do you want to save?", "", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
-            if (i == DialogResult.Yes)
+            int Value_MaxPeriod;
             {
-                //セーブ処理
-                if (close) Close();
+                //扱いづらいから配列にする
+                bool[] chekcPeriod = new bool[SettingValue.MAX_PERIOD];
+                {
+                    chekcPeriod[0] = periodEnableCheck1.Checked;
+                    chekcPeriod[1] = periodEnableCheck2.Checked;
+                    chekcPeriod[2] = periodEnableCheck3.Checked;
+                    chekcPeriod[3] = periodEnableCheck4.Checked;
+                    chekcPeriod[4] = periodEnableCheck5.Checked;
+                    chekcPeriod[5] = periodEnableCheck6.Checked;
+                    chekcPeriod[6] = periodEnableCheck7.Checked;
+                    chekcPeriod[7] = periodEnableCheck8.Checked;
+                    chekcPeriod[8] = periodEnableCheck9.Checked;
+                    chekcPeriod[9] = periodEnableCheck10.Checked;
+                } //Boolに代入
+
+                int val1 = -1, val2 = 10;
+                //後ろからFalseにどこから変わるか調べる
+                for (int i = SettingValue.MAX_PERIOD; i > 0; i--)
+                {
+                    if (chekcPeriod[i - 1])
+                    {
+                        val1 = i;
+                        break;
+                    }
+                }
+                //前からTureにどこから変わるか調べる
+                for (int i = 0; i < SettingValue.MAX_PERIOD; i++)
+                {
+                    if (!chekcPeriod[i])
+                    {
+                        val2 = i;
+                        break;
+                    }
+                }
+                //1からつけてなかったり間が空いていたら警告してFlaseを返す
+                if (val1 == val2)
+                {
+                    Value_MaxPeriod = val1;
+                }
+                else
+                {
+                    string waringText;
+                    if (val1 == -1)
+                        waringText = "Please select one or more.";
+                    else
+                        waringText = "Please do not leave during the check.";
+                    MessageBox.Show(waringText, "Warning",
+                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return false;
+                }
+            }
+
+            //途中 優先順位最上
+
+            //1.時間が昇順か調べる処理、失敗したらFalseを返す
+
+            //2.StartTimeとEndTimeを調べて矛盾していないかを調べる処理
+
+            //3.ローカル配列に保存する
+
+            //4.時間割表のチェックボックスでデータを作る。データがない場合は0
+
+            //ファイル書き出せる形に成形
+            
+
+            //int[] date = new int[];
+            //int a = Form1.ConvertToSeconds(date1PeriodStartTime.Value.ToString("HH:mm:ss"));
+
+            if (MessageBox.Show("Do you want to save?", "Infomation", 
+                MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)
+            {
+                //ファイルに上書き
+                return true;
+            }
+            else
+            {
+                return false;
             }
         }
 

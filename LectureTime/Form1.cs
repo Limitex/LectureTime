@@ -69,6 +69,10 @@ namespace LectureTime
                 }
             });
 
+            //途中 優先順位２番目
+
+            //今日は何曜日か調べて時限データをForm1Globalに配列で保存
+
             //文字列表記の時間を秒数に直してValueつき配列に格納
             for (int i = 0; i < SettingValue.MaxTimetable; i++)
             {
@@ -108,6 +112,12 @@ namespace LectureTime
             int[] progSet = new int[3];
             string[] ButtomLabelText = new string[3];
             Color[] plogColor = new Color[2];
+
+            //途中 優先順位３番目
+
+            //たぶん↓
+            //PeriodNumberと最初宣言した時限データで授業があるか調べる
+            //あった場合は授業時間に普通処理、それ以外に一戸前の時間と比べて授業がある場合はあと何分を表示する
 
             if (PeriodNumber != -1)
             {
@@ -172,7 +182,7 @@ namespace LectureTime
         /// </summary>
         /// <param 00:00:00の形式で入力="str"></param>
         /// <returns></returns>
-        private int ConvertToSeconds(string str)
+        public static int ConvertToSeconds(string str)
         {
             string[] rawTime = str.Split(':');
             double allTime = 0;
