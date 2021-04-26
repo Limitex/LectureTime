@@ -335,8 +335,6 @@ namespace LectureTime
                 }
             } //右下チェックボックスを調べる
 
-            //途中 優先順位最上
-
             string[] SaveDateData_Start = new string[Value_MaxPeriod];
             string[] SaveDateData_Ended = new string[Value_MaxPeriod];
             {
@@ -366,10 +364,7 @@ namespace LectureTime
                     endedData[9] = date10PeriodEndedTime.Value.ToString(SettingValue.DATE_ENCODING);
                 }
 
-
-
                 //昇順か調べる失敗したらfalseを返す
-
                 int MaxPeriodSum = Value_MaxPeriod * 2;
                 int[] check = new int[MaxPeriodSum];
                 for (int i = 0; i < MaxPeriodSum; i++)
@@ -378,7 +373,6 @@ namespace LectureTime
                         check[i] = Form1.ConvertToSeconds(startData[i / 2]);
                     else
                         check[i] = Form1.ConvertToSeconds(endedData[(i - 1) / 2]);
-                    //MessageBox.Show(Form1.ConvertToReturnTime(check[i]));
                 }
 
                 var j = check[0];
@@ -397,14 +391,11 @@ namespace LectureTime
                     SaveDateData_Start[i] = startData[i];
                     SaveDateData_Ended[i] = endedData[i];
                 }
-                MessageBox.Show("Sucsess");
-            }//時間が昇順か調べる処理、失敗したらFalseを返す
+            }//時間が昇順か調べて代入処理、失敗したらFalseを返す
 
+            int[,] periodGraph = new int[SettingValue.MAX_PERIOD, SettingValue.MAX_WEEK];
 
-
-            //2.StartTimeとEndTimeを調べて矛盾していないかを調べる処理
-
-            //3.ローカル配列に保存する
+            //途中 優先順位最上
 
             //4.時間割表のチェックボックスでデータを作る。データがない場合は0
 
