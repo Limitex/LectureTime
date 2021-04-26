@@ -333,11 +333,74 @@ namespace LectureTime
                         MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return false;
                 }
-            }
+            } //右下チェックボックスを調べる
 
             //途中 優先順位最上
 
-            //1.時間が昇順か調べる処理、失敗したらFalseを返す
+            string[] SaveDateData_Start = new string[Value_MaxPeriod];
+            string[] SaveDateData_Ended = new string[Value_MaxPeriod];
+            {
+                //扱いづらいから配列に代入
+                string[] startData = new string[SettingValue.MAX_PERIOD];
+                string[] endedData = new string[SettingValue.MAX_PERIOD];
+                {
+                    startData[0] = date1PeriodStartTime.Value.ToString(SettingValue.DATE_ENCODING);
+                    startData[1] = date2PeriodStartTime.Value.ToString(SettingValue.DATE_ENCODING);
+                    startData[2] = date3PeriodStartTime.Value.ToString(SettingValue.DATE_ENCODING);
+                    startData[3] = date4PeriodStartTime.Value.ToString(SettingValue.DATE_ENCODING);
+                    startData[4] = date5PeriodStartTime.Value.ToString(SettingValue.DATE_ENCODING);
+                    startData[5] = date6PeriodStartTime.Value.ToString(SettingValue.DATE_ENCODING);
+                    startData[6] = date7PeriodStartTime.Value.ToString(SettingValue.DATE_ENCODING);
+                    startData[7] = date8PeriodStartTime.Value.ToString(SettingValue.DATE_ENCODING);
+                    startData[8] = date9PeriodStartTime.Value.ToString(SettingValue.DATE_ENCODING);
+                    startData[9] = date10PeriodStartTime.Value.ToString(SettingValue.DATE_ENCODING);
+                    endedData[0] = date1PeriodEndedTime.Value.ToString(SettingValue.DATE_ENCODING);
+                    endedData[1] = date2PeriodEndedTime.Value.ToString(SettingValue.DATE_ENCODING);
+                    endedData[2] = date3PeriodEndedTime.Value.ToString(SettingValue.DATE_ENCODING);
+                    endedData[3] = date4PeriodEndedTime.Value.ToString(SettingValue.DATE_ENCODING);
+                    endedData[4] = date5PeriodEndedTime.Value.ToString(SettingValue.DATE_ENCODING);
+                    endedData[5] = date6PeriodEndedTime.Value.ToString(SettingValue.DATE_ENCODING);
+                    endedData[6] = date7PeriodEndedTime.Value.ToString(SettingValue.DATE_ENCODING);
+                    endedData[7] = date8PeriodEndedTime.Value.ToString(SettingValue.DATE_ENCODING);
+                    endedData[8] = date9PeriodEndedTime.Value.ToString(SettingValue.DATE_ENCODING);
+                    endedData[9] = date10PeriodEndedTime.Value.ToString(SettingValue.DATE_ENCODING);
+                }
+
+
+
+                //昇順か調べる失敗したらfalseを返す
+
+                int MaxPeriodSum = Value_MaxPeriod * 2;
+                int[] check = new int[MaxPeriodSum];
+                for (int i = 0; i < MaxPeriodSum; i++)
+                {
+                    if (i % 2 == 0)
+                        check[i] = Form1.ConvertToSeconds(startData[i / 2]);
+                    else
+                        check[i] = Form1.ConvertToSeconds(endedData[(i - 1) / 2]);
+                    //MessageBox.Show(Form1.ConvertToReturnTime(check[i]));
+                }
+
+                var j = check[0];
+                for (int i = 1; i < MaxPeriodSum; i++)
+                {
+                    if (j >= check[i])
+                    {
+                        MessageBox.Show("Please set the time in ascending order.");
+                        return false;
+                    }
+                    j = check[i];
+                }
+
+                for (int i = 0; i < Value_MaxPeriod; i++)
+                {
+                    SaveDateData_Start[i] = startData[i];
+                    SaveDateData_Ended[i] = endedData[i];
+                }
+                MessageBox.Show("Sucsess");
+            }//時間が昇順か調べる処理、失敗したらFalseを返す
+
+
 
             //2.StartTimeとEndTimeを調べて矛盾していないかを調べる処理
 
@@ -346,7 +409,7 @@ namespace LectureTime
             //4.時間割表のチェックボックスでデータを作る。データがない場合は0
 
             //ファイル書き出せる形に成形
-            
+
 
             //int[] date = new int[];
             //int a = Form1.ConvertToSeconds(date1PeriodStartTime.Value.ToString("HH:mm:ss"));

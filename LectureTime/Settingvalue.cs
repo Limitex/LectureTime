@@ -13,6 +13,7 @@ namespace LectureTime
         public static readonly int MAX_WEEK = 7;
         public static readonly string DATA_FILE_PATH = @"lectureTime.ltdata";
         public static readonly Encoding ENCODING = Encoding.GetEncoding("UTF-8");
+        public static readonly string DATE_ENCODING = "HH:mm:ss";
         public static string[] StartTime;
         public static string[] EndedTime;
         public static int[,] periodCheckData = new int[MAX_PERIOD, MAX_WEEK];

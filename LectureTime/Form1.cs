@@ -105,7 +105,7 @@ namespace LectureTime
         {
             //ローカル変数の定義
             DateTime dt = DateTime.Now;
-            string dtstr = dt.ToString("HH:mm:ss"), StatusLabelStr;
+            string dtstr = dt.ToString(SettingValue.DATE_ENCODING), StatusLabelStr;
             int ConvertedSeconds = ConvertToSeconds(dtstr);
             PeriodNumber = CheckPeriodNumber(dt, StartTimeValue, EndedTimeValue);
             PeriodLeftNumber = CheckPeriodNumber(dt, LeftTimeValue, StartTimeValue);
@@ -203,7 +203,7 @@ namespace LectureTime
             int buf = -1;
             for (int i = 0; i < SettingValue.MaxTimetable; i++)
             {
-                int j = ConvertToSeconds(dt.ToString("HH:mm:ss"));
+                int j = ConvertToSeconds(dt.ToString(SettingValue.DATE_ENCODING));
                 if (s[i] <= j && j <= e[i])
                 {
                     buf = i;
@@ -218,7 +218,7 @@ namespace LectureTime
         /// </summary>
         /// <param 秒数時間="time"></param>
         /// <returns></returns>
-        public string ConvertToReturnTime(int time)
+        public static string ConvertToReturnTime(int time)
         {
             TimeSpan span = new TimeSpan(0, 0, time);
             return span.ToString(@"hh\:mm\:ss");
