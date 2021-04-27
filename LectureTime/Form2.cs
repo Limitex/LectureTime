@@ -13,17 +13,16 @@ namespace LectureTime
 {
     public partial class Form2 : Form
     {
-        public Form2()
-        {
-            InitializeComponent();
-        }
-
         private CheckBox[,] checkBox_Graph = new CheckBox[SettingValue.MAX_PERIOD, SettingValue.MAX_WEEK];
         private CheckBox[] checkBox_PeriodEnableCheck = new CheckBox[SettingValue.MAX_PERIOD];
         private GroupBox[] groupBox_PeriodGroup = new GroupBox[SettingValue.MAX_PERIOD];
         private DateTimePicker[] dateTimePickersStartTime = new DateTimePicker[SettingValue.MAX_PERIOD];
         private DateTimePicker[] dateTimePickersEndedTime = new DateTimePicker[SettingValue.MAX_PERIOD];
-
+        
+        public Form2()
+        {
+            InitializeComponent();
+        }
         private void Form2_Load(object sender, EventArgs e)
         {
             InValue();
@@ -49,24 +48,9 @@ namespace LectureTime
             }
         }
 
-        private void OK_Button_Click(object sender, EventArgs e)
-        {
-            if (Save(true))
-            {
-                Close();
-            }
-        }
-
-        private void Cancel_Button_Click(object sender, EventArgs e)
-        {
-            this.Close();
-        }
-
-        private void App_Button_Click(object sender, EventArgs e)
-        {
-            Save(false);
-        }
-
+        /// <summary>
+        /// フォームの情報をグローバル変数に代入する
+        /// </summary>
         private void InValue()
         {
             {
@@ -201,7 +185,11 @@ namespace LectureTime
                 } //EndedTimeを配列に入れる
             } //左の各時間設定を配列に入れる
         }
-
+        /// <summary>
+        /// セーブ処理
+        /// </summary>
+        /// <param name="close"></param>
+        /// <returns></returns>
         private bool Save(bool close)
         {
             InValue();
@@ -331,23 +319,29 @@ namespace LectureTime
 
             }//ファイル書き出せる形に成形
 
-            if (MessageBox.Show("Do you want to save?", "Infomation", 
-                MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)
-            {
-                //ファイルに上書き
-                using (var sr = new StreamWriter(SettingValue.DATA_FILE_PATH, false, SettingValue.ENCODING))
-                {
-                    sr.Write(saveData);
-                }
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-        }
 
-        void checks(int num)
+            {
+                if (MessageBox.Show("Do you want to save?", "Infomation",
+                MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)
+                {
+
+                    using (var sr = new StreamWriter(SettingValue.DATA_FILE_PATH, false, SettingValue.ENCODING))
+                    {
+                        sr.Write(saveData);
+                    }
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            } //ファイルに上書き
+        }
+        /// <summary>
+        /// 表を有効、無効かする
+        /// </summary>
+        /// <param name="num"></param>
+        void GraphsChecks(int num)
         {
             int val = num - 1;
             bool checkd = checkBox_PeriodEnableCheck[val].Checked;
@@ -357,7 +351,11 @@ namespace LectureTime
                 checkBox_Graph[val,i].Enabled = checkd;
             }
         }
-
+        /// <summary>
+        /// 渡された配列を一つの文字列にまとめる関数
+        /// </summary>
+        /// <param 文字列の配列="strs"></param>
+        /// <returns></returns>
         string StringSum(string[] strs)
         {
             string buf = string.Empty;
@@ -368,54 +366,60 @@ namespace LectureTime
             return buf;
         }
 
+        private void OK_Button_Click(object sender, EventArgs e)
+        {
+            if (Save(true))
+            {
+                Close();
+            }
+        }
+        private void Cancel_Button_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+        private void App_Button_Click(object sender, EventArgs e)
+        {
+            Save(false);
+        }
         private void pec1_CheckdChanged_event(object sender, EventArgs e)
         {
-            checks(1);
+            GraphsChecks(1);
         }
-
         private void pec2_CheckdChanged_event(object sender, EventArgs e)
         {
-            checks(2);
+            GraphsChecks(2);
         }
-
         private void pec3_CheckdChanged_event(object sender, EventArgs e)
         {
-            checks(3);
+            GraphsChecks(3);
         }
-
         private void pec4_CheckdChanged_event(object sender, EventArgs e)
         {
-            checks(4);
+            GraphsChecks(4);
         }
-
         private void pec5_CheckdChanged_event(object sender, EventArgs e)
         {
-            checks(5);
+            GraphsChecks(5);
         }
-
         private void pec6_CheckdChanged_event(object sender, EventArgs e)
         {
-            checks(6);
+            GraphsChecks(6);
         }
-
         private void pec7_CheckdChanged_event(object sender, EventArgs e)
         {
-            checks(7);
+            GraphsChecks(7);
         }
-
         private void pec8_CheckdChanged_event(object sender, EventArgs e)
         {
-            checks(8);
+            GraphsChecks(8);
         }
-
         private void pec9_CheckdChanged_event(object sender, EventArgs e)
         {
-            checks(9);
+            GraphsChecks(9);
         }
-
         private void pec10_CheckdChanged_event(object sender, EventArgs e)
         {
-            checks(10);
+            GraphsChecks(10);
         }
     }
 }

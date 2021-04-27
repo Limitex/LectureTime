@@ -35,18 +35,28 @@ namespace LectureTime
             this.PeriodGroup1 = new System.Windows.Forms.GroupBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
+            this.date1PeriodStartTime = new System.Windows.Forms.DateTimePicker();
+            this.date1PeriodEndedTime = new System.Windows.Forms.DateTimePicker();
             this.PeriodGroup2 = new System.Windows.Forms.GroupBox();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
+            this.date2PeriodStartTime = new System.Windows.Forms.DateTimePicker();
+            this.date2PeriodEndedTime = new System.Windows.Forms.DateTimePicker();
             this.PeriodGroup3 = new System.Windows.Forms.GroupBox();
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
+            this.date3PeriodStartTime = new System.Windows.Forms.DateTimePicker();
+            this.date3PeriodEndedTime = new System.Windows.Forms.DateTimePicker();
             this.PeriodGroup4 = new System.Windows.Forms.GroupBox();
             this.label7 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
+            this.date4PeriodStartTime = new System.Windows.Forms.DateTimePicker();
+            this.date4PeriodEndedTime = new System.Windows.Forms.DateTimePicker();
             this.PeriodGroup5 = new System.Windows.Forms.GroupBox();
             this.label9 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
+            this.date5PeriodStartTime = new System.Windows.Forms.DateTimePicker();
+            this.date5PeriodEndedTime = new System.Windows.Forms.DateTimePicker();
             this.PeriodGroup6 = new System.Windows.Forms.GroupBox();
             this.label11 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
@@ -161,27 +171,17 @@ namespace LectureTime
             this.checkBox_1st4 = new System.Windows.Forms.CheckBox();
             this.checkBox_1st3 = new System.Windows.Forms.CheckBox();
             this.checkBox_1st2 = new System.Windows.Forms.CheckBox();
-            this.date5PeriodEndedTime = new System.Windows.Forms.DateTimePicker();
-            this.date5PeriodStartTime = new System.Windows.Forms.DateTimePicker();
-            this.date4PeriodEndedTime = new System.Windows.Forms.DateTimePicker();
-            this.date4PeriodStartTime = new System.Windows.Forms.DateTimePicker();
-            this.date3PeriodEndedTime = new System.Windows.Forms.DateTimePicker();
-            this.date3PeriodStartTime = new System.Windows.Forms.DateTimePicker();
-            this.date2PeriodEndedTime = new System.Windows.Forms.DateTimePicker();
-            this.date2PeriodStartTime = new System.Windows.Forms.DateTimePicker();
-            this.date1PeriodEndedTime = new System.Windows.Forms.DateTimePicker();
-            this.date1PeriodStartTime = new System.Windows.Forms.DateTimePicker();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.periodEnableCheck1 = new System.Windows.Forms.CheckBox();
-            this.periodEnableCheck2 = new System.Windows.Forms.CheckBox();
-            this.periodEnableCheck3 = new System.Windows.Forms.CheckBox();
-            this.periodEnableCheck4 = new System.Windows.Forms.CheckBox();
-            this.periodEnableCheck5 = new System.Windows.Forms.CheckBox();
-            this.periodEnableCheck6 = new System.Windows.Forms.CheckBox();
-            this.periodEnableCheck7 = new System.Windows.Forms.CheckBox();
-            this.periodEnableCheck8 = new System.Windows.Forms.CheckBox();
-            this.periodEnableCheck9 = new System.Windows.Forms.CheckBox();
             this.periodEnableCheck10 = new System.Windows.Forms.CheckBox();
+            this.periodEnableCheck9 = new System.Windows.Forms.CheckBox();
+            this.periodEnableCheck8 = new System.Windows.Forms.CheckBox();
+            this.periodEnableCheck7 = new System.Windows.Forms.CheckBox();
+            this.periodEnableCheck6 = new System.Windows.Forms.CheckBox();
+            this.periodEnableCheck5 = new System.Windows.Forms.CheckBox();
+            this.periodEnableCheck4 = new System.Windows.Forms.CheckBox();
+            this.periodEnableCheck3 = new System.Windows.Forms.CheckBox();
+            this.periodEnableCheck2 = new System.Windows.Forms.CheckBox();
+            this.periodEnableCheck1 = new System.Windows.Forms.CheckBox();
             this.PeriodGroup1.SuspendLayout();
             this.PeriodGroup2.SuspendLayout();
             this.PeriodGroup3.SuspendLayout();
@@ -199,7 +199,7 @@ namespace LectureTime
             // 
             // OK_Button
             // 
-            this.OK_Button.Location = new System.Drawing.Point(430, 332);
+            this.OK_Button.Location = new System.Drawing.Point(568, 332);
             this.OK_Button.Name = "OK_Button";
             this.OK_Button.Size = new System.Drawing.Size(129, 57);
             this.OK_Button.TabIndex = 0;
@@ -209,7 +209,7 @@ namespace LectureTime
             // 
             // Cancel_Button
             // 
-            this.Cancel_Button.Location = new System.Drawing.Point(565, 332);
+            this.Cancel_Button.Location = new System.Drawing.Point(703, 332);
             this.Cancel_Button.Name = "Cancel_Button";
             this.Cancel_Button.Size = new System.Drawing.Size(129, 57);
             this.Cancel_Button.TabIndex = 0;
@@ -219,7 +219,7 @@ namespace LectureTime
             // 
             // App_Button
             // 
-            this.App_Button.Location = new System.Drawing.Point(698, 332);
+            this.App_Button.Location = new System.Drawing.Point(430, 332);
             this.App_Button.Name = "App_Button";
             this.App_Button.Size = new System.Drawing.Size(132, 57);
             this.App_Button.TabIndex = 0;
@@ -258,6 +258,26 @@ namespace LectureTime
             this.label1.TabIndex = 2;
             this.label1.Text = "Start time :";
             // 
+            // date1PeriodStartTime
+            // 
+            this.date1PeriodStartTime.Format = System.Windows.Forms.DateTimePickerFormat.Time;
+            this.date1PeriodStartTime.Location = new System.Drawing.Point(86, 14);
+            this.date1PeriodStartTime.Name = "date1PeriodStartTime";
+            this.date1PeriodStartTime.ShowUpDown = true;
+            this.date1PeriodStartTime.Size = new System.Drawing.Size(91, 19);
+            this.date1PeriodStartTime.TabIndex = 1;
+            this.date1PeriodStartTime.Value = new System.DateTime(1753, 1, 1, 0, 0, 0, 0);
+            // 
+            // date1PeriodEndedTime
+            // 
+            this.date1PeriodEndedTime.Format = System.Windows.Forms.DateTimePickerFormat.Time;
+            this.date1PeriodEndedTime.Location = new System.Drawing.Point(86, 39);
+            this.date1PeriodEndedTime.Name = "date1PeriodEndedTime";
+            this.date1PeriodEndedTime.ShowUpDown = true;
+            this.date1PeriodEndedTime.Size = new System.Drawing.Size(91, 19);
+            this.date1PeriodEndedTime.TabIndex = 1;
+            this.date1PeriodEndedTime.Value = new System.DateTime(1753, 1, 1, 0, 0, 0, 0);
+            // 
             // PeriodGroup2
             // 
             this.PeriodGroup2.Controls.Add(this.label3);
@@ -288,6 +308,26 @@ namespace LectureTime
             this.label4.Size = new System.Drawing.Size(62, 12);
             this.label4.TabIndex = 2;
             this.label4.Text = "Start time :";
+            // 
+            // date2PeriodStartTime
+            // 
+            this.date2PeriodStartTime.Format = System.Windows.Forms.DateTimePickerFormat.Time;
+            this.date2PeriodStartTime.Location = new System.Drawing.Point(86, 14);
+            this.date2PeriodStartTime.Name = "date2PeriodStartTime";
+            this.date2PeriodStartTime.ShowUpDown = true;
+            this.date2PeriodStartTime.Size = new System.Drawing.Size(91, 19);
+            this.date2PeriodStartTime.TabIndex = 1;
+            this.date2PeriodStartTime.Value = new System.DateTime(1753, 1, 1, 0, 0, 0, 0);
+            // 
+            // date2PeriodEndedTime
+            // 
+            this.date2PeriodEndedTime.Format = System.Windows.Forms.DateTimePickerFormat.Time;
+            this.date2PeriodEndedTime.Location = new System.Drawing.Point(86, 39);
+            this.date2PeriodEndedTime.Name = "date2PeriodEndedTime";
+            this.date2PeriodEndedTime.ShowUpDown = true;
+            this.date2PeriodEndedTime.Size = new System.Drawing.Size(91, 19);
+            this.date2PeriodEndedTime.TabIndex = 1;
+            this.date2PeriodEndedTime.Value = new System.DateTime(1753, 1, 1, 0, 0, 0, 0);
             // 
             // PeriodGroup3
             // 
@@ -320,6 +360,26 @@ namespace LectureTime
             this.label6.TabIndex = 2;
             this.label6.Text = "Start time :";
             // 
+            // date3PeriodStartTime
+            // 
+            this.date3PeriodStartTime.Format = System.Windows.Forms.DateTimePickerFormat.Time;
+            this.date3PeriodStartTime.Location = new System.Drawing.Point(86, 14);
+            this.date3PeriodStartTime.Name = "date3PeriodStartTime";
+            this.date3PeriodStartTime.ShowUpDown = true;
+            this.date3PeriodStartTime.Size = new System.Drawing.Size(91, 19);
+            this.date3PeriodStartTime.TabIndex = 1;
+            this.date3PeriodStartTime.Value = new System.DateTime(1753, 1, 1, 0, 0, 0, 0);
+            // 
+            // date3PeriodEndedTime
+            // 
+            this.date3PeriodEndedTime.Format = System.Windows.Forms.DateTimePickerFormat.Time;
+            this.date3PeriodEndedTime.Location = new System.Drawing.Point(86, 39);
+            this.date3PeriodEndedTime.Name = "date3PeriodEndedTime";
+            this.date3PeriodEndedTime.ShowUpDown = true;
+            this.date3PeriodEndedTime.Size = new System.Drawing.Size(91, 19);
+            this.date3PeriodEndedTime.TabIndex = 1;
+            this.date3PeriodEndedTime.Value = new System.DateTime(1753, 1, 1, 0, 0, 0, 0);
+            // 
             // PeriodGroup4
             // 
             this.PeriodGroup4.Controls.Add(this.label7);
@@ -351,6 +411,26 @@ namespace LectureTime
             this.label8.TabIndex = 2;
             this.label8.Text = "Start time :";
             // 
+            // date4PeriodStartTime
+            // 
+            this.date4PeriodStartTime.Format = System.Windows.Forms.DateTimePickerFormat.Time;
+            this.date4PeriodStartTime.Location = new System.Drawing.Point(86, 14);
+            this.date4PeriodStartTime.Name = "date4PeriodStartTime";
+            this.date4PeriodStartTime.ShowUpDown = true;
+            this.date4PeriodStartTime.Size = new System.Drawing.Size(91, 19);
+            this.date4PeriodStartTime.TabIndex = 1;
+            this.date4PeriodStartTime.Value = new System.DateTime(2021, 4, 24, 0, 0, 0, 0);
+            // 
+            // date4PeriodEndedTime
+            // 
+            this.date4PeriodEndedTime.Format = System.Windows.Forms.DateTimePickerFormat.Time;
+            this.date4PeriodEndedTime.Location = new System.Drawing.Point(86, 39);
+            this.date4PeriodEndedTime.Name = "date4PeriodEndedTime";
+            this.date4PeriodEndedTime.ShowUpDown = true;
+            this.date4PeriodEndedTime.Size = new System.Drawing.Size(91, 19);
+            this.date4PeriodEndedTime.TabIndex = 1;
+            this.date4PeriodEndedTime.Value = new System.DateTime(2021, 4, 24, 0, 0, 0, 0);
+            // 
             // PeriodGroup5
             // 
             this.PeriodGroup5.Controls.Add(this.label9);
@@ -381,6 +461,26 @@ namespace LectureTime
             this.label10.Size = new System.Drawing.Size(62, 12);
             this.label10.TabIndex = 2;
             this.label10.Text = "Start time :";
+            // 
+            // date5PeriodStartTime
+            // 
+            this.date5PeriodStartTime.Format = System.Windows.Forms.DateTimePickerFormat.Time;
+            this.date5PeriodStartTime.Location = new System.Drawing.Point(86, 14);
+            this.date5PeriodStartTime.Name = "date5PeriodStartTime";
+            this.date5PeriodStartTime.ShowUpDown = true;
+            this.date5PeriodStartTime.Size = new System.Drawing.Size(91, 19);
+            this.date5PeriodStartTime.TabIndex = 1;
+            this.date5PeriodStartTime.Value = new System.DateTime(2021, 4, 24, 0, 0, 0, 0);
+            // 
+            // date5PeriodEndedTime
+            // 
+            this.date5PeriodEndedTime.Format = System.Windows.Forms.DateTimePickerFormat.Time;
+            this.date5PeriodEndedTime.Location = new System.Drawing.Point(86, 39);
+            this.date5PeriodEndedTime.Name = "date5PeriodEndedTime";
+            this.date5PeriodEndedTime.ShowUpDown = true;
+            this.date5PeriodEndedTime.Size = new System.Drawing.Size(91, 19);
+            this.date5PeriodEndedTime.TabIndex = 1;
+            this.date5PeriodEndedTime.Value = new System.DateTime(2021, 4, 24, 0, 0, 0, 0);
             // 
             // PeriodGroup6
             // 
@@ -1535,106 +1635,6 @@ namespace LectureTime
             this.checkBox_1st2.TabIndex = 5;
             this.checkBox_1st2.UseVisualStyleBackColor = true;
             // 
-            // date5PeriodEndedTime
-            // 
-            this.date5PeriodEndedTime.Format = System.Windows.Forms.DateTimePickerFormat.Time;
-            this.date5PeriodEndedTime.Location = new System.Drawing.Point(86, 39);
-            this.date5PeriodEndedTime.Name = "date5PeriodEndedTime";
-            this.date5PeriodEndedTime.ShowUpDown = true;
-            this.date5PeriodEndedTime.Size = new System.Drawing.Size(91, 19);
-            this.date5PeriodEndedTime.TabIndex = 1;
-            this.date5PeriodEndedTime.Value = new System.DateTime(2021, 4, 24, 0, 0, 0, 0);
-            // 
-            // date5PeriodStartTime
-            // 
-            this.date5PeriodStartTime.Format = System.Windows.Forms.DateTimePickerFormat.Time;
-            this.date5PeriodStartTime.Location = new System.Drawing.Point(86, 14);
-            this.date5PeriodStartTime.Name = "date5PeriodStartTime";
-            this.date5PeriodStartTime.ShowUpDown = true;
-            this.date5PeriodStartTime.Size = new System.Drawing.Size(91, 19);
-            this.date5PeriodStartTime.TabIndex = 1;
-            this.date5PeriodStartTime.Value = new System.DateTime(2021, 4, 24, 0, 0, 0, 0);
-            // 
-            // date4PeriodEndedTime
-            // 
-            this.date4PeriodEndedTime.Format = System.Windows.Forms.DateTimePickerFormat.Time;
-            this.date4PeriodEndedTime.Location = new System.Drawing.Point(86, 39);
-            this.date4PeriodEndedTime.Name = "date4PeriodEndedTime";
-            this.date4PeriodEndedTime.ShowUpDown = true;
-            this.date4PeriodEndedTime.Size = new System.Drawing.Size(91, 19);
-            this.date4PeriodEndedTime.TabIndex = 1;
-            this.date4PeriodEndedTime.Value = new System.DateTime(2021, 4, 24, 0, 0, 0, 0);
-            // 
-            // date4PeriodStartTime
-            // 
-            this.date4PeriodStartTime.Format = System.Windows.Forms.DateTimePickerFormat.Time;
-            this.date4PeriodStartTime.Location = new System.Drawing.Point(86, 14);
-            this.date4PeriodStartTime.Name = "date4PeriodStartTime";
-            this.date4PeriodStartTime.ShowUpDown = true;
-            this.date4PeriodStartTime.Size = new System.Drawing.Size(91, 19);
-            this.date4PeriodStartTime.TabIndex = 1;
-            this.date4PeriodStartTime.Value = new System.DateTime(2021, 4, 24, 0, 0, 0, 0);
-            // 
-            // date3PeriodEndedTime
-            // 
-            this.date3PeriodEndedTime.Format = System.Windows.Forms.DateTimePickerFormat.Time;
-            this.date3PeriodEndedTime.Location = new System.Drawing.Point(86, 39);
-            this.date3PeriodEndedTime.Name = "date3PeriodEndedTime";
-            this.date3PeriodEndedTime.ShowUpDown = true;
-            this.date3PeriodEndedTime.Size = new System.Drawing.Size(91, 19);
-            this.date3PeriodEndedTime.TabIndex = 1;
-            this.date3PeriodEndedTime.Value = new System.DateTime(1753, 1, 1, 0, 0, 0, 0);
-            // 
-            // date3PeriodStartTime
-            // 
-            this.date3PeriodStartTime.Format = System.Windows.Forms.DateTimePickerFormat.Time;
-            this.date3PeriodStartTime.Location = new System.Drawing.Point(86, 14);
-            this.date3PeriodStartTime.Name = "date3PeriodStartTime";
-            this.date3PeriodStartTime.ShowUpDown = true;
-            this.date3PeriodStartTime.Size = new System.Drawing.Size(91, 19);
-            this.date3PeriodStartTime.TabIndex = 1;
-            this.date3PeriodStartTime.Value = new System.DateTime(1753, 1, 1, 0, 0, 0, 0);
-            // 
-            // date2PeriodEndedTime
-            // 
-            this.date2PeriodEndedTime.Format = System.Windows.Forms.DateTimePickerFormat.Time;
-            this.date2PeriodEndedTime.Location = new System.Drawing.Point(86, 39);
-            this.date2PeriodEndedTime.Name = "date2PeriodEndedTime";
-            this.date2PeriodEndedTime.ShowUpDown = true;
-            this.date2PeriodEndedTime.Size = new System.Drawing.Size(91, 19);
-            this.date2PeriodEndedTime.TabIndex = 1;
-            this.date2PeriodEndedTime.Value = new System.DateTime(1753, 1, 1, 0, 0, 0, 0);
-            // 
-            // date2PeriodStartTime
-            // 
-            this.date2PeriodStartTime.Format = System.Windows.Forms.DateTimePickerFormat.Time;
-            this.date2PeriodStartTime.Location = new System.Drawing.Point(86, 14);
-            this.date2PeriodStartTime.Name = "date2PeriodStartTime";
-            this.date2PeriodStartTime.ShowUpDown = true;
-            this.date2PeriodStartTime.Size = new System.Drawing.Size(91, 19);
-            this.date2PeriodStartTime.TabIndex = 1;
-            this.date2PeriodStartTime.Value = new System.DateTime(1753, 1, 1, 0, 0, 0, 0);
-            // 
-            // date1PeriodEndedTime
-            // 
-            this.date1PeriodEndedTime.Format = System.Windows.Forms.DateTimePickerFormat.Time;
-            this.date1PeriodEndedTime.Location = new System.Drawing.Point(86, 39);
-            this.date1PeriodEndedTime.Name = "date1PeriodEndedTime";
-            this.date1PeriodEndedTime.ShowUpDown = true;
-            this.date1PeriodEndedTime.Size = new System.Drawing.Size(91, 19);
-            this.date1PeriodEndedTime.TabIndex = 1;
-            this.date1PeriodEndedTime.Value = new System.DateTime(1753, 1, 1, 0, 0, 0, 0);
-            // 
-            // date1PeriodStartTime
-            // 
-            this.date1PeriodStartTime.Format = System.Windows.Forms.DateTimePickerFormat.Time;
-            this.date1PeriodStartTime.Location = new System.Drawing.Point(86, 14);
-            this.date1PeriodStartTime.Name = "date1PeriodStartTime";
-            this.date1PeriodStartTime.ShowUpDown = true;
-            this.date1PeriodStartTime.Size = new System.Drawing.Size(91, 19);
-            this.date1PeriodStartTime.TabIndex = 1;
-            this.date1PeriodStartTime.Value = new System.DateTime(1753, 1, 1, 0, 0, 0, 0);
-            // 
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.periodEnableCheck10);
@@ -1654,93 +1654,16 @@ namespace LectureTime
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Enable Period";
             // 
-            // periodEnableCheck1
+            // periodEnableCheck10
             // 
-            this.periodEnableCheck1.AutoSize = true;
-            this.periodEnableCheck1.Location = new System.Drawing.Point(24, 20);
-            this.periodEnableCheck1.Name = "periodEnableCheck1";
-            this.periodEnableCheck1.Size = new System.Drawing.Size(30, 16);
-            this.periodEnableCheck1.TabIndex = 0;
-            this.periodEnableCheck1.Text = "1";
-            this.periodEnableCheck1.UseVisualStyleBackColor = true;
-            this.periodEnableCheck1.CheckedChanged += new System.EventHandler(this.pec1_CheckdChanged_event);
-            // 
-            // periodEnableCheck2
-            // 
-            this.periodEnableCheck2.AutoSize = true;
-            this.periodEnableCheck2.Location = new System.Drawing.Point(60, 20);
-            this.periodEnableCheck2.Name = "periodEnableCheck2";
-            this.periodEnableCheck2.Size = new System.Drawing.Size(30, 16);
-            this.periodEnableCheck2.TabIndex = 0;
-            this.periodEnableCheck2.Text = "2";
-            this.periodEnableCheck2.UseVisualStyleBackColor = true;
-            this.periodEnableCheck2.CheckedChanged += new System.EventHandler(this.pec2_CheckdChanged_event);
-            // 
-            // periodEnableCheck3
-            // 
-            this.periodEnableCheck3.AutoSize = true;
-            this.periodEnableCheck3.Location = new System.Drawing.Point(96, 20);
-            this.periodEnableCheck3.Name = "periodEnableCheck3";
-            this.periodEnableCheck3.Size = new System.Drawing.Size(30, 16);
-            this.periodEnableCheck3.TabIndex = 0;
-            this.periodEnableCheck3.Text = "3";
-            this.periodEnableCheck3.UseVisualStyleBackColor = true;
-            this.periodEnableCheck3.CheckedChanged += new System.EventHandler(this.pec3_CheckdChanged_event);
-            // 
-            // periodEnableCheck4
-            // 
-            this.periodEnableCheck4.AutoSize = true;
-            this.periodEnableCheck4.Location = new System.Drawing.Point(132, 20);
-            this.periodEnableCheck4.Name = "periodEnableCheck4";
-            this.periodEnableCheck4.Size = new System.Drawing.Size(30, 16);
-            this.periodEnableCheck4.TabIndex = 0;
-            this.periodEnableCheck4.Text = "4";
-            this.periodEnableCheck4.UseVisualStyleBackColor = true;
-            this.periodEnableCheck4.CheckedChanged += new System.EventHandler(this.pec4_CheckdChanged_event);
-            // 
-            // periodEnableCheck5
-            // 
-            this.periodEnableCheck5.AutoSize = true;
-            this.periodEnableCheck5.Location = new System.Drawing.Point(166, 20);
-            this.periodEnableCheck5.Name = "periodEnableCheck5";
-            this.periodEnableCheck5.Size = new System.Drawing.Size(30, 16);
-            this.periodEnableCheck5.TabIndex = 0;
-            this.periodEnableCheck5.Text = "5";
-            this.periodEnableCheck5.UseVisualStyleBackColor = true;
-            this.periodEnableCheck5.CheckedChanged += new System.EventHandler(this.pec5_CheckdChanged_event);
-            // 
-            // periodEnableCheck6
-            // 
-            this.periodEnableCheck6.AutoSize = true;
-            this.periodEnableCheck6.Location = new System.Drawing.Point(202, 20);
-            this.periodEnableCheck6.Name = "periodEnableCheck6";
-            this.periodEnableCheck6.Size = new System.Drawing.Size(30, 16);
-            this.periodEnableCheck6.TabIndex = 0;
-            this.periodEnableCheck6.Text = "6";
-            this.periodEnableCheck6.UseVisualStyleBackColor = true;
-            this.periodEnableCheck6.CheckedChanged += new System.EventHandler(this.pec6_CheckdChanged_event);
-            // 
-            // periodEnableCheck7
-            // 
-            this.periodEnableCheck7.AutoSize = true;
-            this.periodEnableCheck7.Location = new System.Drawing.Point(238, 20);
-            this.periodEnableCheck7.Name = "periodEnableCheck7";
-            this.periodEnableCheck7.Size = new System.Drawing.Size(30, 16);
-            this.periodEnableCheck7.TabIndex = 0;
-            this.periodEnableCheck7.Text = "7";
-            this.periodEnableCheck7.UseVisualStyleBackColor = true;
-            this.periodEnableCheck7.CheckedChanged += new System.EventHandler(this.pec7_CheckdChanged_event);
-            // 
-            // periodEnableCheck8
-            // 
-            this.periodEnableCheck8.AutoSize = true;
-            this.periodEnableCheck8.Location = new System.Drawing.Point(274, 20);
-            this.periodEnableCheck8.Name = "periodEnableCheck8";
-            this.periodEnableCheck8.Size = new System.Drawing.Size(30, 16);
-            this.periodEnableCheck8.TabIndex = 0;
-            this.periodEnableCheck8.Text = "8";
-            this.periodEnableCheck8.UseVisualStyleBackColor = true;
-            this.periodEnableCheck8.CheckedChanged += new System.EventHandler(this.pec8_CheckdChanged_event);
+            this.periodEnableCheck10.AutoSize = true;
+            this.periodEnableCheck10.Location = new System.Drawing.Point(342, 20);
+            this.periodEnableCheck10.Name = "periodEnableCheck10";
+            this.periodEnableCheck10.Size = new System.Drawing.Size(36, 16);
+            this.periodEnableCheck10.TabIndex = 0;
+            this.periodEnableCheck10.Text = "10";
+            this.periodEnableCheck10.UseVisualStyleBackColor = true;
+            this.periodEnableCheck10.CheckedChanged += new System.EventHandler(this.pec10_CheckdChanged_event);
             // 
             // periodEnableCheck9
             // 
@@ -1753,16 +1676,93 @@ namespace LectureTime
             this.periodEnableCheck9.UseVisualStyleBackColor = true;
             this.periodEnableCheck9.CheckedChanged += new System.EventHandler(this.pec9_CheckdChanged_event);
             // 
-            // periodEnableCheck10
+            // periodEnableCheck8
             // 
-            this.periodEnableCheck10.AutoSize = true;
-            this.periodEnableCheck10.Location = new System.Drawing.Point(342, 20);
-            this.periodEnableCheck10.Name = "periodEnableCheck10";
-            this.periodEnableCheck10.Size = new System.Drawing.Size(36, 16);
-            this.periodEnableCheck10.TabIndex = 0;
-            this.periodEnableCheck10.Text = "10";
-            this.periodEnableCheck10.UseVisualStyleBackColor = true;
-            this.periodEnableCheck10.CheckedChanged += new System.EventHandler(this.pec10_CheckdChanged_event);
+            this.periodEnableCheck8.AutoSize = true;
+            this.periodEnableCheck8.Location = new System.Drawing.Point(274, 20);
+            this.periodEnableCheck8.Name = "periodEnableCheck8";
+            this.periodEnableCheck8.Size = new System.Drawing.Size(30, 16);
+            this.periodEnableCheck8.TabIndex = 0;
+            this.periodEnableCheck8.Text = "8";
+            this.periodEnableCheck8.UseVisualStyleBackColor = true;
+            this.periodEnableCheck8.CheckedChanged += new System.EventHandler(this.pec8_CheckdChanged_event);
+            // 
+            // periodEnableCheck7
+            // 
+            this.periodEnableCheck7.AutoSize = true;
+            this.periodEnableCheck7.Location = new System.Drawing.Point(238, 20);
+            this.periodEnableCheck7.Name = "periodEnableCheck7";
+            this.periodEnableCheck7.Size = new System.Drawing.Size(30, 16);
+            this.periodEnableCheck7.TabIndex = 0;
+            this.periodEnableCheck7.Text = "7";
+            this.periodEnableCheck7.UseVisualStyleBackColor = true;
+            this.periodEnableCheck7.CheckedChanged += new System.EventHandler(this.pec7_CheckdChanged_event);
+            // 
+            // periodEnableCheck6
+            // 
+            this.periodEnableCheck6.AutoSize = true;
+            this.periodEnableCheck6.Location = new System.Drawing.Point(202, 20);
+            this.periodEnableCheck6.Name = "periodEnableCheck6";
+            this.periodEnableCheck6.Size = new System.Drawing.Size(30, 16);
+            this.periodEnableCheck6.TabIndex = 0;
+            this.periodEnableCheck6.Text = "6";
+            this.periodEnableCheck6.UseVisualStyleBackColor = true;
+            this.periodEnableCheck6.CheckedChanged += new System.EventHandler(this.pec6_CheckdChanged_event);
+            // 
+            // periodEnableCheck5
+            // 
+            this.periodEnableCheck5.AutoSize = true;
+            this.periodEnableCheck5.Location = new System.Drawing.Point(166, 20);
+            this.periodEnableCheck5.Name = "periodEnableCheck5";
+            this.periodEnableCheck5.Size = new System.Drawing.Size(30, 16);
+            this.periodEnableCheck5.TabIndex = 0;
+            this.periodEnableCheck5.Text = "5";
+            this.periodEnableCheck5.UseVisualStyleBackColor = true;
+            this.periodEnableCheck5.CheckedChanged += new System.EventHandler(this.pec5_CheckdChanged_event);
+            // 
+            // periodEnableCheck4
+            // 
+            this.periodEnableCheck4.AutoSize = true;
+            this.periodEnableCheck4.Location = new System.Drawing.Point(132, 20);
+            this.periodEnableCheck4.Name = "periodEnableCheck4";
+            this.periodEnableCheck4.Size = new System.Drawing.Size(30, 16);
+            this.periodEnableCheck4.TabIndex = 0;
+            this.periodEnableCheck4.Text = "4";
+            this.periodEnableCheck4.UseVisualStyleBackColor = true;
+            this.periodEnableCheck4.CheckedChanged += new System.EventHandler(this.pec4_CheckdChanged_event);
+            // 
+            // periodEnableCheck3
+            // 
+            this.periodEnableCheck3.AutoSize = true;
+            this.periodEnableCheck3.Location = new System.Drawing.Point(96, 20);
+            this.periodEnableCheck3.Name = "periodEnableCheck3";
+            this.periodEnableCheck3.Size = new System.Drawing.Size(30, 16);
+            this.periodEnableCheck3.TabIndex = 0;
+            this.periodEnableCheck3.Text = "3";
+            this.periodEnableCheck3.UseVisualStyleBackColor = true;
+            this.periodEnableCheck3.CheckedChanged += new System.EventHandler(this.pec3_CheckdChanged_event);
+            // 
+            // periodEnableCheck2
+            // 
+            this.periodEnableCheck2.AutoSize = true;
+            this.periodEnableCheck2.Location = new System.Drawing.Point(60, 20);
+            this.periodEnableCheck2.Name = "periodEnableCheck2";
+            this.periodEnableCheck2.Size = new System.Drawing.Size(30, 16);
+            this.periodEnableCheck2.TabIndex = 0;
+            this.periodEnableCheck2.Text = "2";
+            this.periodEnableCheck2.UseVisualStyleBackColor = true;
+            this.periodEnableCheck2.CheckedChanged += new System.EventHandler(this.pec2_CheckdChanged_event);
+            // 
+            // periodEnableCheck1
+            // 
+            this.periodEnableCheck1.AutoSize = true;
+            this.periodEnableCheck1.Location = new System.Drawing.Point(24, 20);
+            this.periodEnableCheck1.Name = "periodEnableCheck1";
+            this.periodEnableCheck1.Size = new System.Drawing.Size(30, 16);
+            this.periodEnableCheck1.TabIndex = 0;
+            this.periodEnableCheck1.Text = "1";
+            this.periodEnableCheck1.UseVisualStyleBackColor = true;
+            this.periodEnableCheck1.CheckedChanged += new System.EventHandler(this.pec1_CheckdChanged_event);
             // 
             // Form2
             // 
