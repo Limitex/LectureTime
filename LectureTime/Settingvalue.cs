@@ -118,12 +118,13 @@ namespace LectureTime
             "1111111\n" +
             "1111111\n" +
             "1111111\n" +
-            "0000000\n" +
-            "0000000\n" +
-            "0000000\n" +
-            "0000000\n" +
+            "2222222\n" +
+            "2222222\n" +
+            "2222222\n" +
+            "2222222\n" +
             "[DateSetDataEnd]";
 
+        //変更する場合は最後尾にくっつけてForm2の３００行めあたりのSwitch文をチェックする
         public static readonly string[] CHECK_STR = 
         { 
             "[LectureTimeData Version 1.0]",

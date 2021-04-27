@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -290,12 +291,54 @@ namespace LectureTime
                 }
             } //グラフデータにまとめる
 
-            //ファイル書き出せる形に成形
+            string saveData = string.Empty;
+            {
+                for (int i = 0; i < DefaultData.CHECK_STR.Length; i++) 
+                {
+                    string buf = DefaultData.CHECK_STR[i] + "\n";
+
+                    switch (i)
+                    {
+                        case 0:
+                        case 2:
+                        case 4:
+                        case 6:
+                            buf += "\n";
+                            break;
+
+                        case 1:
+                            buf += Value_MaxPeriod.ToString() + "\n";
+                            break;
+
+                        case 3:
+                            buf += StringSum(SaveDateData_Start);
+                            break;
+                        case 5:
+                            buf += StringSum(SaveDateData_Ended);
+                            break;
+                        case 7:
+                            buf += StringSum(periodGraph);
+                            break;
+
+                        case 8:
+                        case 9:
+                            break;
+                    }
+                    saveData += buf;
+                }
+
+                MessageBox.Show(saveData);
+
+            }//ファイル書き出せる形に成形
 
             if (MessageBox.Show("Do you want to save?", "Infomation", 
                 MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)
             {
                 //ファイルに上書き
+                using (var sr = new StreamWriter(SettingValue.DATA_FILE_PATH, false, SettingValue.ENCODING))
+                {
+                    sr.Write(saveData);
+                }
                 return true;
             }
             else
@@ -313,6 +356,16 @@ namespace LectureTime
             {
                 checkBox_Graph[val,i].Enabled = checkd;
             }
+        }
+
+        string StringSum(string[] strs)
+        {
+            string buf = string.Empty;
+            foreach (string str in strs)
+            {
+                buf += str + "\n";
+            }
+            return buf;
         }
 
         private void pec1_CheckdChanged_event(object sender, EventArgs e)
