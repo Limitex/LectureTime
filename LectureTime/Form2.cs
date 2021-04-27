@@ -288,15 +288,9 @@ namespace LectureTime
                             checkBox_Graph[i, j].Enabled ? checkBox_Graph[i, j].Checked ? "1" : "0" : "2";
                     }
                 }
-            }
-
-            //4.時間割表のチェックボックスでデータを作る。データがない場合は0
+            } //グラフデータにまとめる
 
             //ファイル書き出せる形に成形
-
-
-            //int[] date = new int[];
-            //int a = Form1.ConvertToSeconds(date1PeriodStartTime.Value.ToString("HH:mm:ss"));
 
             if (MessageBox.Show("Do you want to save?", "Infomation", 
                 MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)
