@@ -17,248 +17,165 @@ namespace LectureTime
             InitializeComponent();
         }
 
+        private CheckBox[,] checkBoxGraph = new CheckBox[SettingValue.MAX_PERIOD, SettingValue.MAX_WEEK];
+        private CheckBox[] checkBoxEnablePeriod = new CheckBox[SettingValue.MAX_PERIOD];
+        private GroupBox[] groupBoxPeriodGroup = new GroupBox[SettingValue.MAX_PERIOD];
+        private DateTimePicker[] dateTimePickersStartTime = new DateTimePicker[SettingValue.MAX_PERIOD];
+        private DateTimePicker[] dateTimePickersEndedTime = new DateTimePicker[SettingValue.MAX_PERIOD];
+
         private void Form2_Load(object sender, EventArgs e)
         {
-            //時間の設定の記述
-            for (int i = 0; i < SettingValue.MaxTimetable; i++) 
             {
-                var start = DateTime.Parse(SettingValue.StartTime[i]);
-                var ended = DateTime.Parse(SettingValue.EndedTime[i]);
-                switch (i)
+                checkBoxGraph[0, 0] = checkBox_1st1;
+                checkBoxGraph[0, 1] = checkBox_1st2;
+                checkBoxGraph[0, 2] = checkBox_1st3;
+                checkBoxGraph[0, 3] = checkBox_1st4;
+                checkBoxGraph[0, 4] = checkBox_1st5;
+                checkBoxGraph[0, 5] = checkBox_1st6;
+                checkBoxGraph[0, 6] = checkBox_1st7;
+
+                checkBoxGraph[1, 0] = checkBox_2nd1;
+                checkBoxGraph[1, 1] = checkBox_2nd2;
+                checkBoxGraph[1, 2] = checkBox_2nd3;
+                checkBoxGraph[1, 3] = checkBox_2nd4;
+                checkBoxGraph[1, 4] = checkBox_2nd5;
+                checkBoxGraph[1, 5] = checkBox_2nd6;
+                checkBoxGraph[1, 6] = checkBox_2nd7;
+
+                checkBoxGraph[2, 0] = checkBox_3rd1;
+                checkBoxGraph[2, 1] = checkBox_3rd2;
+                checkBoxGraph[2, 2] = checkBox_3rd3;
+                checkBoxGraph[2, 3] = checkBox_3rd4;
+                checkBoxGraph[2, 4] = checkBox_3rd5;
+                checkBoxGraph[2, 5] = checkBox_3rd6;
+                checkBoxGraph[2, 6] = checkBox_3rd7;
+
+                checkBoxGraph[3, 0] = checkBox_4th1;
+                checkBoxGraph[3, 1] = checkBox_4th2;
+                checkBoxGraph[3, 2] = checkBox_4th3;
+                checkBoxGraph[3, 3] = checkBox_4th4;
+                checkBoxGraph[3, 4] = checkBox_4th5;
+                checkBoxGraph[3, 5] = checkBox_4th6;
+                checkBoxGraph[3, 6] = checkBox_4th7;
+
+                checkBoxGraph[4, 0] = checkBox_5th1;
+                checkBoxGraph[4, 1] = checkBox_5th2;
+                checkBoxGraph[4, 2] = checkBox_5th3;
+                checkBoxGraph[4, 3] = checkBox_5th4;
+                checkBoxGraph[4, 4] = checkBox_5th5;
+                checkBoxGraph[4, 5] = checkBox_5th6;
+                checkBoxGraph[4, 6] = checkBox_5th7;
+
+                checkBoxGraph[5, 0] = checkBox_6th1;
+                checkBoxGraph[5, 1] = checkBox_6th2;
+                checkBoxGraph[5, 2] = checkBox_6th3;
+                checkBoxGraph[5, 3] = checkBox_6th4;
+                checkBoxGraph[5, 4] = checkBox_6th5;
+                checkBoxGraph[5, 5] = checkBox_6th6;
+                checkBoxGraph[5, 6] = checkBox_6th7;
+
+                checkBoxGraph[6, 0] = checkBox_7th1;
+                checkBoxGraph[6, 1] = checkBox_7th2;
+                checkBoxGraph[6, 2] = checkBox_7th3;
+                checkBoxGraph[6, 3] = checkBox_7th4;
+                checkBoxGraph[6, 4] = checkBox_7th5;
+                checkBoxGraph[6, 5] = checkBox_7th6;
+                checkBoxGraph[6, 6] = checkBox_7th7;
+
+                checkBoxGraph[7, 0] = checkBox_8th1;
+                checkBoxGraph[7, 1] = checkBox_8th2;
+                checkBoxGraph[7, 2] = checkBox_8th3;
+                checkBoxGraph[7, 3] = checkBox_8th4;
+                checkBoxGraph[7, 4] = checkBox_8th5;
+                checkBoxGraph[7, 5] = checkBox_8th6;
+                checkBoxGraph[7, 6] = checkBox_8th7;
+
+                checkBoxGraph[8, 0] = checkBox_9th1;
+                checkBoxGraph[8, 1] = checkBox_9th2;
+                checkBoxGraph[8, 2] = checkBox_9th3;
+                checkBoxGraph[8, 3] = checkBox_9th4;
+                checkBoxGraph[8, 4] = checkBox_9th5;
+                checkBoxGraph[8, 5] = checkBox_9th6;
+                checkBoxGraph[8, 6] = checkBox_9th7;
+
+                checkBoxGraph[9, 0] = checkBox_10th1;
+                checkBoxGraph[9, 1] = checkBox_10th2;
+                checkBoxGraph[9, 2] = checkBox_10th3;
+                checkBoxGraph[9, 3] = checkBox_10th4;
+                checkBoxGraph[9, 4] = checkBox_10th5;
+                checkBoxGraph[9, 5] = checkBox_10th6;
+                checkBoxGraph[9, 6] = checkBox_10th7;
+            } //チェックボックスグラフを配列に入れる 冗長なのは仕方がない
+            {
+                checkBoxEnablePeriod[0] = periodEnableCheck1;
+                checkBoxEnablePeriod[1] = periodEnableCheck2;
+                checkBoxEnablePeriod[2] = periodEnableCheck3;
+                checkBoxEnablePeriod[3] = periodEnableCheck4;
+                checkBoxEnablePeriod[4] = periodEnableCheck5;
+                checkBoxEnablePeriod[5] = periodEnableCheck6;
+                checkBoxEnablePeriod[6] = periodEnableCheck7;
+                checkBoxEnablePeriod[7] = periodEnableCheck8;
+                checkBoxEnablePeriod[8] = periodEnableCheck9;
+                checkBoxEnablePeriod[9] = periodEnableCheck10;
+            } //下のチェックボックスを配列に入れる 冗長なのは仕方がない
+            {
                 {
-                    case 0:
-                        date1PeriodStartTime.Value = start;
-                        date1PeriodEndedTime.Value = ended;
-                        break;
-                    case 1:
-                        date2PeriodStartTime.Value = start;
-                        date2PeriodEndedTime.Value = ended;
-                        break;
-                    case 2:
-                        date3PeriodStartTime.Value = start;
-                        date3PeriodEndedTime.Value = ended;
-                        break;
-                    case 3:
-                        date4PeriodStartTime.Value = start;
-                        date4PeriodEndedTime.Value = ended;
-                        break;
-                    case 4:
-                        date5PeriodStartTime.Value = start;
-                        date5PeriodEndedTime.Value = ended;
-                        break;
-                    case 5:
-                        date6PeriodStartTime.Value = start;
-                        date6PeriodEndedTime.Value = ended;
-                        break;
-                    case 6:
-                        date7PeriodStartTime.Value = start;
-                        date7PeriodEndedTime.Value = ended;
-                        break;
-                    case 7:
-                        date8PeriodStartTime.Value = start;
-                        date8PeriodEndedTime.Value = ended;
-                        break;
-                    case 8:
-                        date9PeriodStartTime.Value = start;
-                        date9PeriodEndedTime.Value = ended;
-                        break;
-                    case 9:
-                        date10PeriodStartTime.Value = start;
-                        date10PeriodEndedTime.Value = ended;
-                        break;
-                }
+                    dateTimePickersStartTime[0] = date1PeriodStartTime;
+                    dateTimePickersStartTime[1] = date2PeriodStartTime;
+                    dateTimePickersStartTime[2] = date3PeriodStartTime;
+                    dateTimePickersStartTime[3] = date4PeriodStartTime;
+                    dateTimePickersStartTime[4] = date5PeriodStartTime;
+                    dateTimePickersStartTime[5] = date6PeriodStartTime;
+                    dateTimePickersStartTime[6] = date7PeriodStartTime;
+                    dateTimePickersStartTime[7] = date8PeriodStartTime;
+                    dateTimePickersStartTime[8] = date9PeriodStartTime;
+                    dateTimePickersStartTime[9] = date10PeriodStartTime;
+                } //StartTiimeを配列に入れる 冗長なのは仕方がない
+                {
+                    dateTimePickersEndedTime[0] = date1PeriodEndedTime;
+                    dateTimePickersEndedTime[1] = date2PeriodEndedTime;
+                    dateTimePickersEndedTime[2] = date3PeriodEndedTime;
+                    dateTimePickersEndedTime[3] = date4PeriodEndedTime;
+                    dateTimePickersEndedTime[4] = date5PeriodEndedTime;
+                    dateTimePickersEndedTime[5] = date6PeriodEndedTime;
+                    dateTimePickersEndedTime[6] = date7PeriodEndedTime;
+                    dateTimePickersEndedTime[7] = date8PeriodEndedTime;
+                    dateTimePickersEndedTime[8] = date9PeriodEndedTime;
+                    dateTimePickersEndedTime[9] = date10PeriodEndedTime;
+                } //EndedTimeを配列に入れる 冗長ナノは仕方がない
+            } //時間設定を配列に入れる
+            {
+                groupBoxPeriodGroup[0] = PeriodGroup1;
+                groupBoxPeriodGroup[1] = PeriodGroup2;
+                groupBoxPeriodGroup[2] = PeriodGroup3;
+                groupBoxPeriodGroup[3] = PeriodGroup4;
+                groupBoxPeriodGroup[4] = PeriodGroup5;
+                groupBoxPeriodGroup[5] = PeriodGroup6;
+                groupBoxPeriodGroup[6] = PeriodGroup7;
+                groupBoxPeriodGroup[7] = PeriodGroup8;
+                groupBoxPeriodGroup[8] = PeriodGroup9;
+                groupBoxPeriodGroup[9] = PeriodGroup10;
+            } //グループボックスを配列に入れる
+
+            //時間の設定の記述
+            for (int i = 0; i < SettingValue.MaxTimetable; i++)
+            {
+                dateTimePickersStartTime[i].Value = DateTime.Parse(SettingValue.StartTime[i]);
+                dateTimePickersEndedTime[i].Value = DateTime.Parse(SettingValue.EndedTime[i]);
             }
 
-            {
-                periodEnableCheck1.Checked = SettingValue.MaxTimetable >= 1;
-                periodEnableCheck2.Checked = SettingValue.MaxTimetable >= 2;
-                periodEnableCheck3.Checked = SettingValue.MaxTimetable >= 3;
-                periodEnableCheck4.Checked = SettingValue.MaxTimetable >= 4;
-                periodEnableCheck5.Checked = SettingValue.MaxTimetable >= 5;
-                periodEnableCheck6.Checked = SettingValue.MaxTimetable >= 6;
-                periodEnableCheck7.Checked = SettingValue.MaxTimetable >= 7;
-                periodEnableCheck8.Checked = SettingValue.MaxTimetable >= 8;
-                periodEnableCheck9.Checked = SettingValue.MaxTimetable >= 9;
-                periodEnableCheck10.Checked = SettingValue.MaxTimetable >= 10;
-
-                PeriodGroup1.Enabled = periodEnableCheck1.Checked;
-                PeriodGroup2.Enabled = periodEnableCheck2.Checked;
-                PeriodGroup3.Enabled = periodEnableCheck3.Checked;
-                PeriodGroup4.Enabled = periodEnableCheck4.Checked;
-                PeriodGroup5.Enabled = periodEnableCheck5.Checked;
-                PeriodGroup6.Enabled = periodEnableCheck6.Checked;
-                PeriodGroup7.Enabled = periodEnableCheck7.Checked;
-                PeriodGroup8.Enabled = periodEnableCheck8.Checked;
-                PeriodGroup9.Enabled = periodEnableCheck9.Checked;
-                PeriodGroup10.Enabled = periodEnableCheck10.Checked;
-            } // チェックの準備と実行
-
-            //チェックボックスに記述
+            //チェックボックス類の設定
             for (int i = 0; i < SettingValue.MAX_PERIOD; i++)
             {
+                checkBoxEnablePeriod[i].Checked = SettingValue.MaxTimetable >= i + 1;
+                groupBoxPeriodGroup[i].Enabled = checkBoxEnablePeriod[i].Checked;
+
                 for (int j = 0; j < SettingValue.MAX_WEEK; j++)
                 {
-                    int d = SettingValue.periodCheckData[i, j];
-                    {
-                        if (i == 0 && j == 0) checkBox_1st1.Checked = d == 1;
-                        if (i == 1 && j == 0) checkBox_2nd1.Checked = d == 1;
-                        if (i == 2 && j == 0) checkBox_3rd1.Checked = d == 1;
-                        if (i == 3 && j == 0) checkBox_4th1.Checked = d == 1;
-                        if (i == 4 && j == 0) checkBox_5th1.Checked = d == 1;
-                        if (i == 5 && j == 0) checkBox_6th1.Checked = d == 1;
-                        if (i == 6 && j == 0) checkBox_7th1.Checked = d == 1;
-                        if (i == 7 && j == 0) checkBox_8th1.Checked = d == 1;
-                        if (i == 8 && j == 0) checkBox_9th1.Checked = d == 1;
-                        if (i == 9 && j == 0) checkBox_10th1.Checked = d == 1;
-
-                        if (i == 0 && j == 1) checkBox_1st2.Checked = d == 1;
-                        if (i == 1 && j == 1) checkBox_2nd2.Checked = d == 1;
-                        if (i == 2 && j == 1) checkBox_3rd2.Checked = d == 1;
-                        if (i == 3 && j == 1) checkBox_4th2.Checked = d == 1;
-                        if (i == 4 && j == 1) checkBox_5th2.Checked = d == 1;
-                        if (i == 5 && j == 1) checkBox_6th2.Checked = d == 1;
-                        if (i == 6 && j == 1) checkBox_7th2.Checked = d == 1;
-                        if (i == 7 && j == 1) checkBox_8th2.Checked = d == 1;
-                        if (i == 8 && j == 1) checkBox_9th2.Checked = d == 1;
-                        if (i == 9 && j == 1) checkBox_10th2.Checked = d == 1;
-
-                        if (i == 0 && j == 2) checkBox_1st3.Checked = d == 1;
-                        if (i == 1 && j == 2) checkBox_2nd3.Checked = d == 1;
-                        if (i == 2 && j == 2) checkBox_3rd3.Checked = d == 1;
-                        if (i == 3 && j == 2) checkBox_4th3.Checked = d == 1;
-                        if (i == 4 && j == 2) checkBox_5th3.Checked = d == 1;
-                        if (i == 5 && j == 2) checkBox_6th3.Checked = d == 1;
-                        if (i == 6 && j == 2) checkBox_7th3.Checked = d == 1;
-                        if (i == 7 && j == 2) checkBox_8th3.Checked = d == 1;
-                        if (i == 8 && j == 2) checkBox_9th3.Checked = d == 1;
-                        if (i == 9 && j == 2) checkBox_10th3.Checked = d == 1;
-
-                        if (i == 0 && j == 3) checkBox_1st4.Checked = d == 1;
-                        if (i == 1 && j == 3) checkBox_2nd4.Checked = d == 1;
-                        if (i == 2 && j == 3) checkBox_3rd4.Checked = d == 1;
-                        if (i == 3 && j == 3) checkBox_4th4.Checked = d == 1;
-                        if (i == 4 && j == 3) checkBox_5th4.Checked = d == 1;
-                        if (i == 5 && j == 3) checkBox_6th4.Checked = d == 1;
-                        if (i == 6 && j == 3) checkBox_7th4.Checked = d == 1;
-                        if (i == 7 && j == 3) checkBox_8th4.Checked = d == 1;
-                        if (i == 8 && j == 3) checkBox_9th4.Checked = d == 1;
-                        if (i == 9 && j == 3) checkBox_10th4.Checked = d == 1;
-
-                        if (i == 0 && j == 4) checkBox_1st5.Checked = d == 1;
-                        if (i == 1 && j == 4) checkBox_2nd5.Checked = d == 1;
-                        if (i == 2 && j == 4) checkBox_3rd5.Checked = d == 1;
-                        if (i == 3 && j == 4) checkBox_4th5.Checked = d == 1;
-                        if (i == 4 && j == 4) checkBox_5th5.Checked = d == 1;
-                        if (i == 5 && j == 4) checkBox_6th5.Checked = d == 1;
-                        if (i == 6 && j == 4) checkBox_7th5.Checked = d == 1;
-                        if (i == 7 && j == 4) checkBox_8th5.Checked = d == 1;
-                        if (i == 8 && j == 4) checkBox_9th5.Checked = d == 1;
-                        if (i == 9 && j == 4) checkBox_10th5.Checked = d == 1;
-
-                        if (i == 0 && j == 5) checkBox_1st6.Checked = d == 1;
-                        if (i == 1 && j == 5) checkBox_2nd6.Checked = d == 1;
-                        if (i == 2 && j == 5) checkBox_3rd6.Checked = d == 1;
-                        if (i == 3 && j == 5) checkBox_4th6.Checked = d == 1;
-                        if (i == 4 && j == 5) checkBox_5th6.Checked = d == 1;
-                        if (i == 5 && j == 5) checkBox_6th6.Checked = d == 1;
-                        if (i == 6 && j == 5) checkBox_7th6.Checked = d == 1;
-                        if (i == 7 && j == 5) checkBox_8th6.Checked = d == 1;
-                        if (i == 8 && j == 5) checkBox_9th6.Checked = d == 1;
-                        if (i == 9 && j == 5) checkBox_10th6.Checked = d == 1;
-
-                        if (i == 0 && j == 6) checkBox_1st7.Checked = d == 1;
-                        if (i == 1 && j == 6) checkBox_2nd7.Checked = d == 1;
-                        if (i == 2 && j == 6) checkBox_3rd7.Checked = d == 1;
-                        if (i == 3 && j == 6) checkBox_4th7.Checked = d == 1;
-                        if (i == 4 && j == 6) checkBox_5th7.Checked = d == 1;
-                        if (i == 5 && j == 6) checkBox_6th7.Checked = d == 1;
-                        if (i == 6 && j == 6) checkBox_7th7.Checked = d == 1;
-                        if (i == 7 && j == 6) checkBox_8th7.Checked = d == 1;
-                        if (i == 8 && j == 6) checkBox_9th7.Checked = d == 1;
-                        if (i == 9 && j == 6) checkBox_10th7.Checked = d == 1;
-                    } // CheckBox の値の設定
+                    checkBoxGraph[i, j].Checked = SettingValue.periodCheckData[i, j] == 1;
+                    checkBoxGraph[i, j].Enabled = checkBoxEnablePeriod[i].Checked;
                 }
             }
-
-            {
-                checkBox_1st1.Enabled = periodEnableCheck1.Checked;
-                checkBox_2nd1.Enabled = periodEnableCheck2.Checked;
-                checkBox_3rd1.Enabled = periodEnableCheck3.Checked;
-                checkBox_4th1.Enabled = periodEnableCheck4.Checked;
-                checkBox_5th1.Enabled = periodEnableCheck5.Checked;
-                checkBox_6th1.Enabled = periodEnableCheck6.Checked;
-                checkBox_7th1.Enabled = periodEnableCheck7.Checked;
-                checkBox_8th1.Enabled = periodEnableCheck8.Checked;
-                checkBox_9th1.Enabled = periodEnableCheck9.Checked;
-                checkBox_10th1.Enabled = periodEnableCheck10.Checked;
-
-                checkBox_1st2.Enabled = periodEnableCheck1.Checked;
-                checkBox_2nd2.Enabled = periodEnableCheck2.Checked;
-                checkBox_3rd2.Enabled = periodEnableCheck3.Checked;
-                checkBox_4th2.Enabled = periodEnableCheck4.Checked;
-                checkBox_5th2.Enabled = periodEnableCheck5.Checked;
-                checkBox_6th2.Enabled = periodEnableCheck6.Checked;
-                checkBox_7th2.Enabled = periodEnableCheck7.Checked;
-                checkBox_8th2.Enabled = periodEnableCheck8.Checked;
-                checkBox_9th2.Enabled = periodEnableCheck9.Checked;
-                checkBox_10th2.Enabled = periodEnableCheck10.Checked;
-
-                checkBox_1st3.Enabled = periodEnableCheck1.Checked;
-                checkBox_2nd3.Enabled = periodEnableCheck2.Checked;
-                checkBox_3rd3.Enabled = periodEnableCheck3.Checked;
-                checkBox_4th3.Enabled = periodEnableCheck4.Checked;
-                checkBox_5th3.Enabled = periodEnableCheck5.Checked;
-                checkBox_6th3.Enabled = periodEnableCheck6.Checked;
-                checkBox_7th3.Enabled = periodEnableCheck7.Checked;
-                checkBox_8th3.Enabled = periodEnableCheck8.Checked;
-                checkBox_9th3.Enabled = periodEnableCheck9.Checked;
-                checkBox_10th3.Enabled = periodEnableCheck10.Checked;
-
-                checkBox_1st4.Enabled = periodEnableCheck1.Checked;
-                checkBox_2nd4.Enabled = periodEnableCheck2.Checked;
-                checkBox_3rd4.Enabled = periodEnableCheck3.Checked;
-                checkBox_4th4.Enabled = periodEnableCheck4.Checked;
-                checkBox_5th4.Enabled = periodEnableCheck5.Checked;
-                checkBox_6th4.Enabled = periodEnableCheck6.Checked;
-                checkBox_7th4.Enabled = periodEnableCheck7.Checked;
-                checkBox_8th4.Enabled = periodEnableCheck8.Checked;
-                checkBox_9th4.Enabled = periodEnableCheck9.Checked;
-                checkBox_10th4.Enabled = periodEnableCheck10.Checked;
-
-                checkBox_1st5.Enabled = periodEnableCheck1.Checked;
-                checkBox_2nd5.Enabled = periodEnableCheck2.Checked;
-                checkBox_3rd5.Enabled = periodEnableCheck3.Checked;
-                checkBox_4th5.Enabled = periodEnableCheck4.Checked;
-                checkBox_5th5.Enabled = periodEnableCheck5.Checked;
-                checkBox_6th5.Enabled = periodEnableCheck6.Checked;
-                checkBox_7th5.Enabled = periodEnableCheck7.Checked;
-                checkBox_8th5.Enabled = periodEnableCheck8.Checked;
-                checkBox_9th5.Enabled = periodEnableCheck9.Checked;
-                checkBox_10th5.Enabled = periodEnableCheck10.Checked;
-
-                checkBox_1st6.Enabled = periodEnableCheck1.Checked;
-                checkBox_2nd6.Enabled = periodEnableCheck2.Checked;
-                checkBox_3rd6.Enabled = periodEnableCheck3.Checked;
-                checkBox_4th6.Enabled = periodEnableCheck4.Checked;
-                checkBox_5th6.Enabled = periodEnableCheck5.Checked;
-                checkBox_6th6.Enabled = periodEnableCheck6.Checked;
-                checkBox_7th6.Enabled = periodEnableCheck7.Checked;
-                checkBox_8th6.Enabled = periodEnableCheck8.Checked;
-                checkBox_9th6.Enabled = periodEnableCheck9.Checked;
-                checkBox_10th6.Enabled = periodEnableCheck10.Checked;
-
-                checkBox_1st7.Enabled = periodEnableCheck1.Checked;
-                checkBox_2nd7.Enabled = periodEnableCheck2.Checked;
-                checkBox_3rd7.Enabled = periodEnableCheck3.Checked;
-                checkBox_4th7.Enabled = periodEnableCheck4.Checked;
-                checkBox_5th7.Enabled = periodEnableCheck5.Checked;
-                checkBox_6th7.Enabled = periodEnableCheck6.Checked;
-                checkBox_7th7.Enabled = periodEnableCheck7.Checked;
-                checkBox_8th7.Enabled = periodEnableCheck8.Checked;
-                checkBox_9th7.Enabled = periodEnableCheck9.Checked;
-                checkBox_10th7.Enabled = periodEnableCheck10.Checked;
-            } //Checkboxの正体 超絶頭悪い書き方
-
         }
 
         private void OK_Button_Click(object sender, EventArgs e)
