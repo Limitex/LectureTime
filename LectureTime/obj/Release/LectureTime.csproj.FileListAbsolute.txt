@@ -1,0 +1,10 @@
+D:\Documents\GitHub\LectureTime\LectureTime\bin\Release\LectureTime.exe.config
+D:\Documents\GitHub\LectureTime\LectureTime\bin\Release\LectureTime.exe
+D:\Documents\GitHub\LectureTime\LectureTime\bin\Release\LectureTime.pdb
+D:\Documents\GitHub\LectureTime\LectureTime\obj\Release\LectureTime.Form1.resources
+D:\Documents\GitHub\LectureTime\LectureTime\obj\Release\LectureTime.Form2.resources
+D:\Documents\GitHub\LectureTime\LectureTime\obj\Release\LectureTime.Properties.Resources.resources
+D:\Documents\GitHub\LectureTime\LectureTime\obj\Release\LectureTime.csproj.GenerateResource.cache
+D:\Documents\GitHub\LectureTime\LectureTime\obj\Release\LectureTime.csproj.CoreCompileInputs.cache
+D:\Documents\GitHub\LectureTime\LectureTime\obj\Release\LectureTime.exe
+D:\Documents\GitHub\LectureTime\LectureTime\obj\Release\LectureTime.pdb
