@@ -13,37 +13,36 @@ namespace LectureTime
 {
     public partial class Form2 : Form
     {
-        private CheckBox[,] checkBox_Graph = new CheckBox[SettingValue.MAX_PERIOD, SettingValue.MAX_WEEK];
-        private CheckBox[] checkBox_PeriodEnableCheck = new CheckBox[SettingValue.MAX_PERIOD];
-        private GroupBox[] groupBox_PeriodGroup = new GroupBox[SettingValue.MAX_PERIOD];
-        private DateTimePicker[] dateTimePickersStartTime = new DateTimePicker[SettingValue.MAX_PERIOD];
-        private DateTimePicker[] dateTimePickersEndedTime = new DateTimePicker[SettingValue.MAX_PERIOD];
+        private CheckBox[,]      FormControlCheckBoxGraphSet = new CheckBox[SettingValue.MAX_PERIOD, SettingValue.MAX_WEEK];
+        private CheckBox[]       FormControlCheckBoxWeekSet = new CheckBox[SettingValue.MAX_PERIOD];
+        private GroupBox[]       FormControlGroupBoxTimeSet = new GroupBox[SettingValue.MAX_PERIOD];
+        private DateTimePicker[] FormControlDateTimePickerStartTime = new DateTimePicker[SettingValue.MAX_PERIOD];
+        private DateTimePicker[] FormControlDateTimePickerEndedTime = new DateTimePicker[SettingValue.MAX_PERIOD];
         
         public Form2()
         {
             InitializeComponent();
+            InValue();
         }
         private void Form2_Load(object sender, EventArgs e)
         {
-            InValue();
-
             //時間の設定の記述
             for (int i = 0; i < SettingValue.ReadValue_MaxTimeTable; i++)
             {
-                dateTimePickersStartTime[i].Value = DateTime.Parse(SettingValue.ReadValue_StartTime[i]);
-                dateTimePickersEndedTime[i].Value = DateTime.Parse(SettingValue.ReadValue_EndedTime[i]);
+                FormControlDateTimePickerStartTime[i].Value = DateTime.Parse(SettingValue.ReadValue_StartTime[i]);
+                FormControlDateTimePickerEndedTime[i].Value = DateTime.Parse(SettingValue.ReadValue_EndedTime[i]);
             }
 
             //チェックボックス類の設定
             for (int i = 0; i < SettingValue.MAX_PERIOD; i++)
             {
-                checkBox_PeriodEnableCheck[i].Checked = SettingValue.ReadValue_MaxTimeTable >= i + 1;
-                groupBox_PeriodGroup[i].Enabled = checkBox_PeriodEnableCheck[i].Checked;
+                FormControlCheckBoxWeekSet[i].Checked = SettingValue.ReadValue_MaxTimeTable >= i + 1;
+                FormControlGroupBoxTimeSet[i].Enabled = FormControlCheckBoxWeekSet[i].Checked;
 
                 for (int j = 0; j < SettingValue.MAX_WEEK; j++)
                 {
-                    checkBox_Graph[i, j].Checked = SettingValue.ReadValue_DateSetData[i, j] == 1;
-                    checkBox_Graph[i, j].Enabled = checkBox_PeriodEnableCheck[i].Checked;
+                    FormControlCheckBoxGraphSet[i, j].Checked = SettingValue.ReadValue_DateSetData[i, j] == 1;
+                    FormControlCheckBoxGraphSet[i, j].Enabled = FormControlCheckBoxWeekSet[i].Checked;
                 }
             }
         }
@@ -54,134 +53,134 @@ namespace LectureTime
         private void InValue()
         {
             {
-                checkBox_Graph[0, 0] = checkBox_1st1;
-                checkBox_Graph[0, 1] = checkBox_1st2;
-                checkBox_Graph[0, 2] = checkBox_1st3;
-                checkBox_Graph[0, 3] = checkBox_1st4;
-                checkBox_Graph[0, 4] = checkBox_1st5;
-                checkBox_Graph[0, 5] = checkBox_1st6;
-                checkBox_Graph[0, 6] = checkBox_1st7;
+                FormControlCheckBoxGraphSet[0, 0] = checkBox_1st1;
+                FormControlCheckBoxGraphSet[0, 1] = checkBox_1st2;
+                FormControlCheckBoxGraphSet[0, 2] = checkBox_1st3;
+                FormControlCheckBoxGraphSet[0, 3] = checkBox_1st4;
+                FormControlCheckBoxGraphSet[0, 4] = checkBox_1st5;
+                FormControlCheckBoxGraphSet[0, 5] = checkBox_1st6;
+                FormControlCheckBoxGraphSet[0, 6] = checkBox_1st7;
 
-                checkBox_Graph[1, 0] = checkBox_2nd1;
-                checkBox_Graph[1, 1] = checkBox_2nd2;
-                checkBox_Graph[1, 2] = checkBox_2nd3;
-                checkBox_Graph[1, 3] = checkBox_2nd4;
-                checkBox_Graph[1, 4] = checkBox_2nd5;
-                checkBox_Graph[1, 5] = checkBox_2nd6;
-                checkBox_Graph[1, 6] = checkBox_2nd7;
+                FormControlCheckBoxGraphSet[1, 0] = checkBox_2nd1;
+                FormControlCheckBoxGraphSet[1, 1] = checkBox_2nd2;
+                FormControlCheckBoxGraphSet[1, 2] = checkBox_2nd3;
+                FormControlCheckBoxGraphSet[1, 3] = checkBox_2nd4;
+                FormControlCheckBoxGraphSet[1, 4] = checkBox_2nd5;
+                FormControlCheckBoxGraphSet[1, 5] = checkBox_2nd6;
+                FormControlCheckBoxGraphSet[1, 6] = checkBox_2nd7;
 
-                checkBox_Graph[2, 0] = checkBox_3rd1;
-                checkBox_Graph[2, 1] = checkBox_3rd2;
-                checkBox_Graph[2, 2] = checkBox_3rd3;
-                checkBox_Graph[2, 3] = checkBox_3rd4;
-                checkBox_Graph[2, 4] = checkBox_3rd5;
-                checkBox_Graph[2, 5] = checkBox_3rd6;
-                checkBox_Graph[2, 6] = checkBox_3rd7;
+                FormControlCheckBoxGraphSet[2, 0] = checkBox_3rd1;
+                FormControlCheckBoxGraphSet[2, 1] = checkBox_3rd2;
+                FormControlCheckBoxGraphSet[2, 2] = checkBox_3rd3;
+                FormControlCheckBoxGraphSet[2, 3] = checkBox_3rd4;
+                FormControlCheckBoxGraphSet[2, 4] = checkBox_3rd5;
+                FormControlCheckBoxGraphSet[2, 5] = checkBox_3rd6;
+                FormControlCheckBoxGraphSet[2, 6] = checkBox_3rd7;
 
-                checkBox_Graph[3, 0] = checkBox_4th1;
-                checkBox_Graph[3, 1] = checkBox_4th2;
-                checkBox_Graph[3, 2] = checkBox_4th3;
-                checkBox_Graph[3, 3] = checkBox_4th4;
-                checkBox_Graph[3, 4] = checkBox_4th5;
-                checkBox_Graph[3, 5] = checkBox_4th6;
-                checkBox_Graph[3, 6] = checkBox_4th7;
+                FormControlCheckBoxGraphSet[3, 0] = checkBox_4th1;
+                FormControlCheckBoxGraphSet[3, 1] = checkBox_4th2;
+                FormControlCheckBoxGraphSet[3, 2] = checkBox_4th3;
+                FormControlCheckBoxGraphSet[3, 3] = checkBox_4th4;
+                FormControlCheckBoxGraphSet[3, 4] = checkBox_4th5;
+                FormControlCheckBoxGraphSet[3, 5] = checkBox_4th6;
+                FormControlCheckBoxGraphSet[3, 6] = checkBox_4th7;
 
-                checkBox_Graph[4, 0] = checkBox_5th1;
-                checkBox_Graph[4, 1] = checkBox_5th2;
-                checkBox_Graph[4, 2] = checkBox_5th3;
-                checkBox_Graph[4, 3] = checkBox_5th4;
-                checkBox_Graph[4, 4] = checkBox_5th5;
-                checkBox_Graph[4, 5] = checkBox_5th6;
-                checkBox_Graph[4, 6] = checkBox_5th7;
+                FormControlCheckBoxGraphSet[4, 0] = checkBox_5th1;
+                FormControlCheckBoxGraphSet[4, 1] = checkBox_5th2;
+                FormControlCheckBoxGraphSet[4, 2] = checkBox_5th3;
+                FormControlCheckBoxGraphSet[4, 3] = checkBox_5th4;
+                FormControlCheckBoxGraphSet[4, 4] = checkBox_5th5;
+                FormControlCheckBoxGraphSet[4, 5] = checkBox_5th6;
+                FormControlCheckBoxGraphSet[4, 6] = checkBox_5th7;
 
-                checkBox_Graph[5, 0] = checkBox_6th1;
-                checkBox_Graph[5, 1] = checkBox_6th2;
-                checkBox_Graph[5, 2] = checkBox_6th3;
-                checkBox_Graph[5, 3] = checkBox_6th4;
-                checkBox_Graph[5, 4] = checkBox_6th5;
-                checkBox_Graph[5, 5] = checkBox_6th6;
-                checkBox_Graph[5, 6] = checkBox_6th7;
+                FormControlCheckBoxGraphSet[5, 0] = checkBox_6th1;
+                FormControlCheckBoxGraphSet[5, 1] = checkBox_6th2;
+                FormControlCheckBoxGraphSet[5, 2] = checkBox_6th3;
+                FormControlCheckBoxGraphSet[5, 3] = checkBox_6th4;
+                FormControlCheckBoxGraphSet[5, 4] = checkBox_6th5;
+                FormControlCheckBoxGraphSet[5, 5] = checkBox_6th6;
+                FormControlCheckBoxGraphSet[5, 6] = checkBox_6th7;
 
-                checkBox_Graph[6, 0] = checkBox_7th1;
-                checkBox_Graph[6, 1] = checkBox_7th2;
-                checkBox_Graph[6, 2] = checkBox_7th3;
-                checkBox_Graph[6, 3] = checkBox_7th4;
-                checkBox_Graph[6, 4] = checkBox_7th5;
-                checkBox_Graph[6, 5] = checkBox_7th6;
-                checkBox_Graph[6, 6] = checkBox_7th7;
+                FormControlCheckBoxGraphSet[6, 0] = checkBox_7th1;
+                FormControlCheckBoxGraphSet[6, 1] = checkBox_7th2;
+                FormControlCheckBoxGraphSet[6, 2] = checkBox_7th3;
+                FormControlCheckBoxGraphSet[6, 3] = checkBox_7th4;
+                FormControlCheckBoxGraphSet[6, 4] = checkBox_7th5;
+                FormControlCheckBoxGraphSet[6, 5] = checkBox_7th6;
+                FormControlCheckBoxGraphSet[6, 6] = checkBox_7th7;
 
-                checkBox_Graph[7, 0] = checkBox_8th1;
-                checkBox_Graph[7, 1] = checkBox_8th2;
-                checkBox_Graph[7, 2] = checkBox_8th3;
-                checkBox_Graph[7, 3] = checkBox_8th4;
-                checkBox_Graph[7, 4] = checkBox_8th5;
-                checkBox_Graph[7, 5] = checkBox_8th6;
-                checkBox_Graph[7, 6] = checkBox_8th7;
+                FormControlCheckBoxGraphSet[7, 0] = checkBox_8th1;
+                FormControlCheckBoxGraphSet[7, 1] = checkBox_8th2;
+                FormControlCheckBoxGraphSet[7, 2] = checkBox_8th3;
+                FormControlCheckBoxGraphSet[7, 3] = checkBox_8th4;
+                FormControlCheckBoxGraphSet[7, 4] = checkBox_8th5;
+                FormControlCheckBoxGraphSet[7, 5] = checkBox_8th6;
+                FormControlCheckBoxGraphSet[7, 6] = checkBox_8th7;
 
-                checkBox_Graph[8, 0] = checkBox_9th1;
-                checkBox_Graph[8, 1] = checkBox_9th2;
-                checkBox_Graph[8, 2] = checkBox_9th3;
-                checkBox_Graph[8, 3] = checkBox_9th4;
-                checkBox_Graph[8, 4] = checkBox_9th5;
-                checkBox_Graph[8, 5] = checkBox_9th6;
-                checkBox_Graph[8, 6] = checkBox_9th7;
+                FormControlCheckBoxGraphSet[8, 0] = checkBox_9th1;
+                FormControlCheckBoxGraphSet[8, 1] = checkBox_9th2;
+                FormControlCheckBoxGraphSet[8, 2] = checkBox_9th3;
+                FormControlCheckBoxGraphSet[8, 3] = checkBox_9th4;
+                FormControlCheckBoxGraphSet[8, 4] = checkBox_9th5;
+                FormControlCheckBoxGraphSet[8, 5] = checkBox_9th6;
+                FormControlCheckBoxGraphSet[8, 6] = checkBox_9th7;
 
-                checkBox_Graph[9, 0] = checkBox_10th1;
-                checkBox_Graph[9, 1] = checkBox_10th2;
-                checkBox_Graph[9, 2] = checkBox_10th3;
-                checkBox_Graph[9, 3] = checkBox_10th4;
-                checkBox_Graph[9, 4] = checkBox_10th5;
-                checkBox_Graph[9, 5] = checkBox_10th6;
-                checkBox_Graph[9, 6] = checkBox_10th7;
+                FormControlCheckBoxGraphSet[9, 0] = checkBox_10th1;
+                FormControlCheckBoxGraphSet[9, 1] = checkBox_10th2;
+                FormControlCheckBoxGraphSet[9, 2] = checkBox_10th3;
+                FormControlCheckBoxGraphSet[9, 3] = checkBox_10th4;
+                FormControlCheckBoxGraphSet[9, 4] = checkBox_10th5;
+                FormControlCheckBoxGraphSet[9, 5] = checkBox_10th6;
+                FormControlCheckBoxGraphSet[9, 6] = checkBox_10th7;
             } //右上のチェックボックスを配列に入れる
             {
-                checkBox_PeriodEnableCheck[0] = periodEnableCheck1;
-                checkBox_PeriodEnableCheck[1] = periodEnableCheck2;
-                checkBox_PeriodEnableCheck[2] = periodEnableCheck3;
-                checkBox_PeriodEnableCheck[3] = periodEnableCheck4;
-                checkBox_PeriodEnableCheck[4] = periodEnableCheck5;
-                checkBox_PeriodEnableCheck[5] = periodEnableCheck6;
-                checkBox_PeriodEnableCheck[6] = periodEnableCheck7;
-                checkBox_PeriodEnableCheck[7] = periodEnableCheck8;
-                checkBox_PeriodEnableCheck[8] = periodEnableCheck9;
-                checkBox_PeriodEnableCheck[9] = periodEnableCheck10;
+                FormControlCheckBoxWeekSet[0] = periodEnableCheck1;
+                FormControlCheckBoxWeekSet[1] = periodEnableCheck2;
+                FormControlCheckBoxWeekSet[2] = periodEnableCheck3;
+                FormControlCheckBoxWeekSet[3] = periodEnableCheck4;
+                FormControlCheckBoxWeekSet[4] = periodEnableCheck5;
+                FormControlCheckBoxWeekSet[5] = periodEnableCheck6;
+                FormControlCheckBoxWeekSet[6] = periodEnableCheck7;
+                FormControlCheckBoxWeekSet[7] = periodEnableCheck8;
+                FormControlCheckBoxWeekSet[8] = periodEnableCheck9;
+                FormControlCheckBoxWeekSet[9] = periodEnableCheck10;
             } //右下のチェックボックスを配列に入れる
             {
-                groupBox_PeriodGroup[0] = PeriodGroup1;
-                groupBox_PeriodGroup[1] = PeriodGroup2;
-                groupBox_PeriodGroup[2] = PeriodGroup3;
-                groupBox_PeriodGroup[3] = PeriodGroup4;
-                groupBox_PeriodGroup[4] = PeriodGroup5;
-                groupBox_PeriodGroup[5] = PeriodGroup6;
-                groupBox_PeriodGroup[6] = PeriodGroup7;
-                groupBox_PeriodGroup[7] = PeriodGroup8;
-                groupBox_PeriodGroup[8] = PeriodGroup9;
-                groupBox_PeriodGroup[9] = PeriodGroup10;
+                FormControlGroupBoxTimeSet[0] = PeriodGroup1;
+                FormControlGroupBoxTimeSet[1] = PeriodGroup2;
+                FormControlGroupBoxTimeSet[2] = PeriodGroup3;
+                FormControlGroupBoxTimeSet[3] = PeriodGroup4;
+                FormControlGroupBoxTimeSet[4] = PeriodGroup5;
+                FormControlGroupBoxTimeSet[5] = PeriodGroup6;
+                FormControlGroupBoxTimeSet[6] = PeriodGroup7;
+                FormControlGroupBoxTimeSet[7] = PeriodGroup8;
+                FormControlGroupBoxTimeSet[8] = PeriodGroup9;
+                FormControlGroupBoxTimeSet[9] = PeriodGroup10;
             } //左のグループボックスを配列に入れる
             {
                 {
-                    dateTimePickersStartTime[0] = date1PeriodStartTime;
-                    dateTimePickersStartTime[1] = date2PeriodStartTime;
-                    dateTimePickersStartTime[2] = date3PeriodStartTime;
-                    dateTimePickersStartTime[3] = date4PeriodStartTime;
-                    dateTimePickersStartTime[4] = date5PeriodStartTime;
-                    dateTimePickersStartTime[5] = date6PeriodStartTime;
-                    dateTimePickersStartTime[6] = date7PeriodStartTime;
-                    dateTimePickersStartTime[7] = date8PeriodStartTime;
-                    dateTimePickersStartTime[8] = date9PeriodStartTime;
-                    dateTimePickersStartTime[9] = date10PeriodStartTime;
+                    FormControlDateTimePickerStartTime[0] = date1PeriodStartTime;
+                    FormControlDateTimePickerStartTime[1] = date2PeriodStartTime;
+                    FormControlDateTimePickerStartTime[2] = date3PeriodStartTime;
+                    FormControlDateTimePickerStartTime[3] = date4PeriodStartTime;
+                    FormControlDateTimePickerStartTime[4] = date5PeriodStartTime;
+                    FormControlDateTimePickerStartTime[5] = date6PeriodStartTime;
+                    FormControlDateTimePickerStartTime[6] = date7PeriodStartTime;
+                    FormControlDateTimePickerStartTime[7] = date8PeriodStartTime;
+                    FormControlDateTimePickerStartTime[8] = date9PeriodStartTime;
+                    FormControlDateTimePickerStartTime[9] = date10PeriodStartTime;
                 } //StartTiimeを配列に入れる
                 {
-                    dateTimePickersEndedTime[0] = date1PeriodEndedTime;
-                    dateTimePickersEndedTime[1] = date2PeriodEndedTime;
-                    dateTimePickersEndedTime[2] = date3PeriodEndedTime;
-                    dateTimePickersEndedTime[3] = date4PeriodEndedTime;
-                    dateTimePickersEndedTime[4] = date5PeriodEndedTime;
-                    dateTimePickersEndedTime[5] = date6PeriodEndedTime;
-                    dateTimePickersEndedTime[6] = date7PeriodEndedTime;
-                    dateTimePickersEndedTime[7] = date8PeriodEndedTime;
-                    dateTimePickersEndedTime[8] = date9PeriodEndedTime;
-                    dateTimePickersEndedTime[9] = date10PeriodEndedTime;
+                    FormControlDateTimePickerEndedTime[0] = date1PeriodEndedTime;
+                    FormControlDateTimePickerEndedTime[1] = date2PeriodEndedTime;
+                    FormControlDateTimePickerEndedTime[2] = date3PeriodEndedTime;
+                    FormControlDateTimePickerEndedTime[3] = date4PeriodEndedTime;
+                    FormControlDateTimePickerEndedTime[4] = date5PeriodEndedTime;
+                    FormControlDateTimePickerEndedTime[5] = date6PeriodEndedTime;
+                    FormControlDateTimePickerEndedTime[6] = date7PeriodEndedTime;
+                    FormControlDateTimePickerEndedTime[7] = date8PeriodEndedTime;
+                    FormControlDateTimePickerEndedTime[8] = date9PeriodEndedTime;
+                    FormControlDateTimePickerEndedTime[9] = date10PeriodEndedTime;
                 } //EndedTimeを配列に入れる
             } //左の各時間設定を配列に入れる
         }
@@ -190,42 +189,46 @@ namespace LectureTime
         /// </summary>
         /// <param name="close"></param>
         /// <returns></returns>
-        private bool Save(bool close)
+        private bool Save()
         {
             InValue();
 
             int Value_MaxPeriod;
+            string[] SaveDateData_Start;
+            string[] SaveDateData_Ended;
+            string[] periodGraph = new string[SettingValue.MAX_PERIOD];
+            string saveData = string.Empty;
+
+            //右下チェックボックスを調べて代入、失敗したらfalseを返す
             {
-                int val1 = -1, val2 = 10;
                 //後ろからFalseにどこから変わるか調べる
+                int checkFromFront = 10, checkFromButtom = -1;
                 for (int i = SettingValue.MAX_PERIOD; i > 0; i--)
                 {
-                    if (checkBox_PeriodEnableCheck[i - 1].Checked)
+                    if (FormControlCheckBoxWeekSet[i - 1].Checked)
                     {
-                        val1 = i;
+                        checkFromButtom = i;
                         break;
                     }
                 }
-
                 //前からTureにどこから変わるか調べる
                 for (int i = 0; i < SettingValue.MAX_PERIOD; i++)
                 {
-                    if (!checkBox_PeriodEnableCheck[i].Checked)
+                    if (!FormControlCheckBoxWeekSet[i].Checked)
                     {
-                        val2 = i;
+                        checkFromFront = i;
                         break;
                     }
                 }
-
                 //1からつけてなかったり間が空いていたら警告してFlaseを返す
-                if (val1 == val2)
+                if (checkFromButtom == checkFromFront)
                 {
-                    Value_MaxPeriod = val1;
+                    Value_MaxPeriod = checkFromButtom;
                 }
                 else
                 {
                     string waringText;
-                    if (val1 == -1)
+                    if (checkFromButtom == -1)
                         waringText = "Please select one or more.";
                     else
                         waringText = "Please do not leave during the check.";
@@ -233,21 +236,20 @@ namespace LectureTime
                         MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return false;
                 }
-            } //右下チェックボックスを調べて代入、失敗したらfalseを返す
-
-            string[] SaveDateData_Start = new string[Value_MaxPeriod];
-            string[] SaveDateData_Ended = new string[Value_MaxPeriod];
+            }
+            //時間が昇順か調べて代入処理、失敗したらFalseを返す
             {
+                SaveDateData_Start = new string[Value_MaxPeriod];
+                SaveDateData_Ended = new string[Value_MaxPeriod];
                 int MaxPeriodSum = Value_MaxPeriod * 2;
                 int[] check = new int[MaxPeriodSum];
                 for (int i = 0; i < MaxPeriodSum; i++)
                 {
                     if (i % 2 == 0)
-                        check[i] = Form1.ConvertToSeconds(dateTimePickersStartTime[i / 2].Value.ToString(SettingValue.DATE_ENCODING));
+                        check[i] = Form1.ConvertToSeconds(FormControlDateTimePickerStartTime[i / 2].Value.ToString(SettingValue.DATE_ENCODING));
                     else
-                        check[i] = Form1.ConvertToSeconds(dateTimePickersEndedTime[(i - 1) / 2].Value.ToString(SettingValue.DATE_ENCODING));
+                        check[i] = Form1.ConvertToSeconds(FormControlDateTimePickerEndedTime[(i - 1) / 2].Value.ToString(SettingValue.DATE_ENCODING));
                 }
-
                 var j = check[0];
                 for (int i = 1; i < MaxPeriodSum; i++)
                 {
@@ -259,31 +261,28 @@ namespace LectureTime
                     }
                     j = check[i];
                 }
-
                 for (int i = 0; i < Value_MaxPeriod; i++)
                 {
-                    SaveDateData_Start[i] = dateTimePickersStartTime[i].Value.ToString(SettingValue.DATE_ENCODING);
-                    SaveDateData_Ended[i] = dateTimePickersEndedTime[i].Value.ToString(SettingValue.DATE_ENCODING);
+                    SaveDateData_Start[i] = FormControlDateTimePickerStartTime[i].Value.ToString(SettingValue.DATE_ENCODING);
+                    SaveDateData_Ended[i] = FormControlDateTimePickerEndedTime[i].Value.ToString(SettingValue.DATE_ENCODING);
                 }
-            }　//時間が昇順か調べて代入処理、失敗したらFalseを返す
-
-            string[] periodGraph = new string[SettingValue.MAX_PERIOD];
+            }
+            //グラフデータをまとめる
             {
                 for (int i = 0; i < SettingValue.MAX_PERIOD; i++)
                 {
                     for (int j = 0; j < SettingValue.MAX_WEEK; j++)
                     {
                         periodGraph[i] += 
-                            checkBox_Graph[i, j].Enabled ? checkBox_Graph[i, j].Checked ? "1" : "0" : "2";
+                            FormControlCheckBoxGraphSet[i, j].Enabled ? FormControlCheckBoxGraphSet[i, j].Checked ? "1" : "0" : "2";
                     }
                 }
-            } //グラフデータにまとめる
-
-            string saveData = string.Empty;
+            }
+            //ファイル書き出せる形に成形
             {
                 for (int i = 0; i < DefaultData.CHECK_STR.Length; i++) 
                 {
-                    string buf = DefaultData.CHECK_STR[i] + "\n";
+                    string sum = DefaultData.CHECK_STR[i] + "\n";
 
                     switch (i)
                     {
@@ -291,35 +290,34 @@ namespace LectureTime
                         case 2:
                         case 4:
                         case 6:
-                            buf += "\n";
+                            sum += "\n";
                             break;
 
                         case 1:
-                            buf += Value_MaxPeriod.ToString() + "\n";
+                            sum += Value_MaxPeriod.ToString() + "\n";
                             break;
 
                         case 3:
-                            buf += StringSum(SaveDateData_Start);
+                            sum += StringSum(SaveDateData_Start);
                             break;
                         case 5:
-                            buf += StringSum(SaveDateData_Ended);
+                            sum += StringSum(SaveDateData_Ended);
                             break;
                         case 7:
-                            buf += StringSum(periodGraph);
+                            sum += StringSum(periodGraph);
                             break;
 
                         case 8:
                         case 9:
                             break;
                     }
-                    saveData += buf;
+                    saveData += sum;
                 }
-            }//ファイル書き出せる形に成形
-
-
+            }
+            //ファイルに上書き
             {
                 if (MessageBox.Show("Do you want to save?", "Infomation",
-                MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)
+                    MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)
                 {
                     using (var sr = new StreamWriter(SettingValue.DATA_FILE_PATH, false, SettingValue.ENCODING))
                     {
@@ -332,7 +330,7 @@ namespace LectureTime
                 {
                     return false;
                 }
-            } //ファイルに上書き
+            }
         }
         /// <summary>
         /// 表を有効、無効かする
@@ -341,42 +339,37 @@ namespace LectureTime
         void GraphsChecks(int num)
         {
             int val = num - 1;
-            bool checkd = checkBox_PeriodEnableCheck[val].Checked;
-            groupBox_PeriodGroup[val].Enabled = checkd;
+            bool checkd = FormControlCheckBoxWeekSet[val].Checked;
+            FormControlGroupBoxTimeSet[val].Enabled = checkd;
             for (int i = 0; i < SettingValue.MAX_WEEK; i++) 
-            {
-                checkBox_Graph[val,i].Enabled = checkd;
-            }
+                FormControlCheckBoxGraphSet[val,i].Enabled = checkd;
         }
         /// <summary>
         /// 渡された配列を一つの文字列にまとめる関数
         /// </summary>
         /// <param 文字列の配列="strs"></param>
         /// <returns></returns>
-        string StringSum(string[] strs)
+        string StringSum(string[] str)
         {
-            string buf = string.Empty;
-            foreach (string str in strs)
+            string sum = string.Empty;
+            foreach (string i in str)
             {
-                buf += str + "\n";
+                sum += i + "\n";
             }
-            return buf;
+            return sum;
         }
 
         private void OK_Button_Click(object sender, EventArgs e)
         {
-            if (Save(true))
-            {
-                Close();
-            }
+            if (Save()) Close();
         }
         private void Cancel_Button_Click(object sender, EventArgs e)
         {
-            this.Close();
+            Close();
         }
         private void App_Button_Click(object sender, EventArgs e)
         {
-            Save(false);
+            Save();
         }
         private void pec1_CheckdChanged_event(object sender, EventArgs e)
         {

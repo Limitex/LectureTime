@@ -22,18 +22,21 @@ namespace LectureTime
         public static readonly Color BAR_BACK_COLOR_INTIME = Color.Black;
         public static readonly Color BAR_BACK_COLOR_LEFTTIME = Color.Black;
         public static readonly Color BAR_BACK_COLOR_OUTTIME = Color.Black;
-
         public static readonly Encoding ENCODING = Encoding.GetEncoding("UTF-8");
 
         public static int      ReadValue_MaxTimeTable = -1;
         public static string[] ReadValue_StartTime;
         public static string[] ReadValue_EndedTime;
         public static int[,]   ReadValue_DateSetData = new int[MAX_PERIOD, MAX_WEEK];
-        public static int      ReadValue_TodayType;
 
         public static int[] MakeValue_StartTimeValue;
         public static int[] MakeValue_EndedTimeValue;
+        public static int   MakeValue_TodayType;
 
+        /// <summary>
+        /// 静的な設定
+        /// </summary>
+        /// <param 読み込んだファイルデータ="inData"></param>
         public static void OneTimeSetting(string inData)
         {
             string[] Data = inData.Split('\n');
@@ -86,11 +89,13 @@ namespace LectureTime
 
             MoreTimeSetting();
         }
-
+        /// <summary>
+        /// 動的な設定
+        /// </summary>
         public static void MoreTimeSetting()
         {
             //今日の曜日を設定
-            ReadValue_TodayType = (int)DateTime.Now.DayOfWeek;
+            MakeValue_TodayType = (int)DateTime.Now.DayOfWeek;
         }
 
         /// <summary>

@@ -67,6 +67,7 @@ namespace LectureTime
         /// </summary>
         private void everySeconds_event()
         {
+            SettingValue.MoreTimeSetting();
             //ローカル変数の定義
             DateTime NowTimeRaw = DateTime.Now;
             string   NowTimeString = NowTimeRaw.ToString(SettingValue.DATE_ENCODING);
@@ -93,7 +94,7 @@ namespace LectureTime
             TodayPeriodData = new int[SettingValue.MAX_PERIOD];
             for (int i = 0; i < SettingValue.MAX_PERIOD; i++) 
             {
-                TodayPeriodData[i] = SettingValue.ReadValue_DateSetData[i, SettingValue.ReadValue_TodayType];
+                TodayPeriodData[i] = SettingValue.ReadValue_DateSetData[i, SettingValue.MakeValue_TodayType];
                 if (TodayPeriodData[i] == 1) count++;
             }
             TodayStartTime = new string[count];
