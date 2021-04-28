@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -18,20 +19,16 @@ namespace LectureTime
         public static string[] EndedTime;
         public static int[,] periodCheckData = new int[MAX_PERIOD, MAX_WEEK];
 
+        public static int todayType;
+
         public static void Setting(string inData)
         {
-
             string[] Data = inData.Split('\n');
 
             //使用時間と最大値の定義と配列の初期化
             MaxTimetable = int.Parse(Data[FindIndex(Data, DefaultData.CHECK_STR[1]) + 1]);
             StartTime = new string[MaxTimetable];
             EndedTime = new string[MaxTimetable];
-
-            //値に変換するときに使う配列の初期化
-            Form1.StartTimeValue = new int[MaxTimetable];
-            Form1.EndedTimeValue = new int[MaxTimetable];
-            Form1.LeftTimeValue = new int[MaxTimetable];
 
             //チェックデータの作成
             int x = FindIndex(Data, DefaultData.CHECK_STR[7]) + 1;
@@ -52,7 +49,7 @@ namespace LectureTime
                     }
                     if (MaxTimetable <= i)
                     {
-                        periodCheckData[i, j] = -1;
+                        periodCheckData[i, j] = 2;
                     }
                 }
             }
@@ -63,7 +60,15 @@ namespace LectureTime
                 StartTime[i] = Data[FindIndex(Data, DefaultData.CHECK_STR[3]) + 1 + i];
                 EndedTime[i] = Data[FindIndex(Data, DefaultData.CHECK_STR[5]) + 1 + i];
             }
+
+            //今日の曜日を設定
+            todayType = (int)DateTime.Now.DayOfWeek;
+
+
+            //メインフォームの再設定
+            Form1.HereSetting();
         }
+
         /// <summary>
         /// 文字列が配列のどこに入っているかを調べる
         /// 見つからなかった場合は-1を返す

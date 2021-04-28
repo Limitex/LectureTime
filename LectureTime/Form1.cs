@@ -22,10 +22,10 @@ namespace LectureTime
         //プログラムで使う変数類
         public static int[] StartTimeValue;
         public static int[] EndedTimeValue;
-        public static int[] LeftTimeValue;
+        //public static int[] LeftTimeValue;
 
         int PeriodNumber = -1;
-        int PeriodLeftNumber = -1;
+        //int PeriodLeftNumber = -1;
         Thread eventHandleThread;
         delegate void d();
 
@@ -68,19 +68,6 @@ namespace LectureTime
                     Thread.Sleep(1);
                 }
             });
-
-            //途中 優先順位２番目
-
-            //今日は何曜日か調べて時限データをForm1Globalに配列で保存
-
-            //文字列表記の時間を秒数に直してValueつき配列に格納
-            for (int i = 0; i < SettingValue.MaxTimetable; i++)
-            {
-                int j = ConvertToSeconds(SettingValue.StartTime[i]);
-                StartTimeValue[i] = j;
-                EndedTimeValue[i] = ConvertToSeconds(SettingValue.EndedTime[i]);
-                LeftTimeValue[i] = j - 600;
-            }
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -108,44 +95,86 @@ namespace LectureTime
             string dtstr = dt.ToString(SettingValue.DATE_ENCODING), StatusLabelStr;
             int ConvertedSeconds = ConvertToSeconds(dtstr);
             PeriodNumber = CheckPeriodNumber(dt, StartTimeValue, EndedTimeValue);
-            PeriodLeftNumber = CheckPeriodNumber(dt, LeftTimeValue, StartTimeValue);
+
             int[] progSet = new int[3];
             string[] ButtomLabelText = new string[3];
             Color[] plogColor = new Color[2];
 
+
+            int count = 0;
+            int[] todyaPeroidEnable = new int[SettingValue.MAX_PERIOD];
+            for (int i = 0; i < SettingValue.MAX_PERIOD; i++) 
+            {
+                todyaPeroidEnable[i] = SettingValue.periodCheckData[i, SettingValue.todayType];
+                if (todyaPeroidEnable[i] == 1)
+                {
+                    count++;
+                }
+            }
+
+            int[] todayStartTimeValue = new int[count];
+            int[] todayEndedTimeValue = new int[count];
+            count = 0;
+            for (int i = 0; i < SettingValue.MAX_PERIOD; i++)
+            {
+                if (todyaPeroidEnable[i] == 1)
+                {
+                    todayStartTimeValue[count] = StartTimeValue[i];
+                    todayEndedTimeValue[count] = EndedTimeValue[i];
+                    count++;
+                }
+            }
+            string[] todayStartTime = new string[count];
+            string[] todayEndedTime = new string[count];
+            for (int i = 0; i < count; i++)
+            {
+                todayStartTime[i] = ConvertToReturnTime(todayStartTimeValue[i]);
+                todayEndedTime[i] = ConvertToReturnTime(todayEndedTimeValue[i]);
+            }
+
+            int nowPeriodNumber = CheckPeriodNumber(dt, todayStartTimeValue, todayEndedTimeValue);
+
+            int[] todayLeftTimeValue = new int[count];
+
+            for (int i = 0; i < count; i++)
+            {
+                todayLeftTimeValue[i] = todayStartTimeValue[i] - 600;
+            }
+
+            int todayPeriodLeftNumber = CheckPeriodNumber(dt, todayLeftTimeValue, todayStartTimeValue);
             //途中 優先順位３番目
 
             //たぶん↓
             //PeriodNumberと最初宣言した時限データで授業があるか調べる
             //あった場合は授業時間に普通処理、それ以外に一戸前の時間と比べて授業がある場合はあと何分を表示する
 
-            if (PeriodNumber != -1)
+            if (PeriodNumber != -1 && nowPeriodNumber != -1)
             {
                 //授業時間中
-                progSet[0] = StartTimeValue[PeriodNumber];
-                progSet[1] = EndedTimeValue[PeriodNumber];
+                progSet[0] = todayStartTimeValue[nowPeriodNumber];
+                progSet[1] = todayEndedTimeValue[nowPeriodNumber];
                 progSet[2] = ConvertedSeconds;
                 plogColor[0] = Color.Black;
                 plogColor[1] = Color.Red;
-                ButtomLabelText[0] = SettingValue.StartTime[PeriodNumber];
-                ButtomLabelText[1] = SettingValue.EndedTime[PeriodNumber];
-                ButtomLabelText[2] = ConvertToReturnTime(EndedTimeValue[PeriodNumber] - ConvertedSeconds);
+                ButtomLabelText[0] = todayStartTime[nowPeriodNumber];
+                ButtomLabelText[1] = todayEndedTime[nowPeriodNumber];
+                ButtomLabelText[2] = ConvertToReturnTime(todayEndedTimeValue[nowPeriodNumber] - ConvertedSeconds);
                 StatusLabelStr = "During the " + (PeriodNumber + 1).ToString() + " time period class!";
             }
             else
             {
-                if (PeriodLeftNumber != -1)
+                if (todayPeriodLeftNumber != -1)
                 {
                     //授業まであと何分
-                    int i = LeftTimeValue[PeriodLeftNumber];
-                    string str = ConvertToReturnTime(StartTimeValue[PeriodLeftNumber] - ConvertedSeconds);
-                    progSet[0] = LeftTimeValue[PeriodLeftNumber];
-                    progSet[1] = StartTimeValue[PeriodLeftNumber];
+                    int i = todayLeftTimeValue[todayPeriodLeftNumber];
+                    string str = ConvertToReturnTime(todayStartTimeValue[todayPeriodLeftNumber] - ConvertedSeconds);
+                    progSet[0] = todayLeftTimeValue[todayPeriodLeftNumber];
+                    progSet[1] = todayStartTimeValue[todayPeriodLeftNumber];
                     progSet[2] = ConvertedSeconds;
                     plogColor[0] = Color.Black;
                     plogColor[1] = Color.Yellow;
                     ButtomLabelText[0] = ConvertToReturnTime(i);
-                    ButtomLabelText[1] = SettingValue.StartTime[PeriodLeftNumber];
+                    ButtomLabelText[1] = todayStartTime[todayPeriodLeftNumber];
                     ButtomLabelText[2] = str;
                     StatusLabelStr = str.Remove(0,3) + " times left for start class!";
                 }
@@ -177,6 +206,26 @@ namespace LectureTime
         }
 
         /// <summary>
+        /// From1の使用変数の設定
+        /// </summary>
+        public static void HereSetting()
+        {
+            //値に変換するときに使う配列の初期化
+            StartTimeValue = new int[SettingValue.MaxTimetable];
+            EndedTimeValue = new int[SettingValue.MaxTimetable];
+            //LeftTimeValue = new int[SettingValue.MaxTimetable];
+
+            //文字列表記の時間を秒数に直してValueつき配列に格納
+            for (int i = 0; i < SettingValue.MaxTimetable; i++)
+            {
+                int j = ConvertToSeconds(SettingValue.StartTime[i]);
+                StartTimeValue[i] = j;
+                EndedTimeValue[i] = ConvertToSeconds(SettingValue.EndedTime[i]);
+                //LeftTimeValue[i] = j - 600;
+            }
+        }
+
+        /// <summary>
         /// strから秒に変換するメソッド
         /// 
         /// </summary>
@@ -201,7 +250,7 @@ namespace LectureTime
         public int CheckPeriodNumber(DateTime dt, int[] s, int[] e)
         {
             int buf = -1;
-            for (int i = 0; i < SettingValue.MaxTimetable; i++)
+            for (int i = 0; i < s.Length; i++)
             {
                 int j = ConvertToSeconds(dt.ToString(SettingValue.DATE_ENCODING));
                 if (s[i] <= j && j <= e[i])

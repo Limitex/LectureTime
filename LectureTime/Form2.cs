@@ -324,11 +324,11 @@ namespace LectureTime
                 if (MessageBox.Show("Do you want to save?", "Infomation",
                 MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)
                 {
-
                     using (var sr = new StreamWriter(SettingValue.DATA_FILE_PATH, false, SettingValue.ENCODING))
                     {
                         sr.Write(saveData);
                     }
+                    SettingValue.Setting(Form1.ReadFile());
                     return true;
                 }
                 else
