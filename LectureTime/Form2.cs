@@ -28,21 +28,21 @@ namespace LectureTime
             InValue();
 
             //時間の設定の記述
-            for (int i = 0; i < SettingValue.MaxTimetable; i++)
+            for (int i = 0; i < SettingValue.ReadValue_MaxTimeTable; i++)
             {
-                dateTimePickersStartTime[i].Value = DateTime.Parse(SettingValue.StartTime[i]);
-                dateTimePickersEndedTime[i].Value = DateTime.Parse(SettingValue.EndedTime[i]);
+                dateTimePickersStartTime[i].Value = DateTime.Parse(SettingValue.ReadValue_StartTime[i]);
+                dateTimePickersEndedTime[i].Value = DateTime.Parse(SettingValue.ReadValue_EndedTime[i]);
             }
 
             //チェックボックス類の設定
             for (int i = 0; i < SettingValue.MAX_PERIOD; i++)
             {
-                checkBox_PeriodEnableCheck[i].Checked = SettingValue.MaxTimetable >= i + 1;
+                checkBox_PeriodEnableCheck[i].Checked = SettingValue.ReadValue_MaxTimeTable >= i + 1;
                 groupBox_PeriodGroup[i].Enabled = checkBox_PeriodEnableCheck[i].Checked;
 
                 for (int j = 0; j < SettingValue.MAX_WEEK; j++)
                 {
-                    checkBox_Graph[i, j].Checked = SettingValue.periodCheckData[i, j] == 1;
+                    checkBox_Graph[i, j].Checked = SettingValue.ReadValue_DateSetData[i, j] == 1;
                     checkBox_Graph[i, j].Enabled = checkBox_PeriodEnableCheck[i].Checked;
                 }
             }
@@ -325,7 +325,7 @@ namespace LectureTime
                     {
                         sr.Write(saveData);
                     }
-                    SettingValue.Setting(Form1.ReadFile());
+                    SettingValue.OneTimeSetting(FileProccesing.FileRead());
                     return true;
                 }
                 else

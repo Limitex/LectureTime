@@ -19,37 +19,15 @@ namespace LectureTime
 {
     public partial class Form1 : Form
     {
-        //プログラムで使う変数類
-        public static int[] StartTimeValue;
-        public static int[] EndedTimeValue;
-
-        int PeriodNumber = -1;
         Thread eventHandleThread;
-        delegate void d();
+        delegate void everySeconds();
 
         public Form1()
         {
             InitializeComponent();
 
-            //ファイルが見つからなかった場合はファイルを作る処理
-            if (!File.Exists(SettingValue.DATA_FILE_PATH))
-            {
-                MakeFile();
-            }
-
-            //ファイルが正しくなかったら作りなおす処理
-            string DataFileData = ReadFile();
-            foreach (string sr in DefaultData.CHECK_STR)
-            {
-                if (!DataFileData.Contains(sr))
-                {
-                    MakeFile();
-                    DataFileData = ReadFile();
-                    break;
-                }
-            }
-            
-            SettingValue.Setting(DataFileData);
+            //設定と初期化
+            SettingValue.OneTimeSetting(FileProccesing.FileRead());
 
             //1秒ごとに呼び出すイベントを作るスレッドの定義
             eventHandleThread = new Thread(() =>
@@ -60,165 +38,146 @@ namespace LectureTime
                     dt = DateTime.Now;
                     if (dt != dtbf)
                     {
-                        Invoke(new d(everySeconds_event));
+                        Invoke(new everySeconds(everySeconds_event));
                         dtbf = dt;
                     }
                     Thread.Sleep(1);
                 }
             });
         }
-
         private void Form1_Load(object sender, EventArgs e)
         {
             //１秒スレッドの開始
             eventHandleThread.Start();
         }
-
         private void setteiToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            //設定フォームの表示
             Form2 form2 = new Form2();
             form2.Show();
         }
-
         private void FormClosing_event(object sender, FormClosingEventArgs e)
         {
             //１秒スレッドの破棄
             eventHandleThread.Abort();
         }
 
+        /// <summary>
+        /// 毎秒実行される関数
+        /// </summary>
         private void everySeconds_event()
         {
             //ローカル変数の定義
-            DateTime dt = DateTime.Now;
-            string dtstr = dt.ToString(SettingValue.DATE_ENCODING), StatusLabelStr;
-            int ConvertedSeconds = ConvertToSeconds(dtstr);
-            PeriodNumber = CheckPeriodNumber(dt, StartTimeValue, EndedTimeValue);
+            DateTime NowTimeRaw = DateTime.Now;
+            string   NowTimeString = NowTimeRaw.ToString(SettingValue.DATE_ENCODING);
+            int      NowTimeSeconds = ConvertToSeconds(NowTimeString);
+            int      NowTimePeriod = CheckPeriodNumber(NowTimeRaw, SettingValue.MakeValue_StartTimeValue, SettingValue.MakeValue_EndedTimeValue);
 
-            int[] progSet = new int[3];
-            string[] ButtomLabelText = new string[3];
-            Color[] plogColor = new Color[2];
+            int[]    TodayPeriodData;
+            string[] TodayStartTime;
+            string[] TodayEndedTime;
+            int[]    TodayStartTimeValue;
+            int[]    TodayEndedTimeValue;
+            int[]    TodayLeftTimeValue;
+            int      TodayNowPeriod;
+            int      TodayNowLeftPeriod;
 
+            string   SettingFrontText;
+            int[]    SettingProgressBar = new int[3];
+            string[] SettingButtomText = new string[3];
+            Color[]  SettingProgressBarColor = new Color[2];
 
             int count = 0;
-            int[] todyaPeroidEnable = new int[SettingValue.MAX_PERIOD];
+
+            //今日の曜日の時間割データを読み込む
+            TodayPeriodData = new int[SettingValue.MAX_PERIOD];
             for (int i = 0; i < SettingValue.MAX_PERIOD; i++) 
             {
-                todyaPeroidEnable[i] = SettingValue.periodCheckData[i, SettingValue.todayType];
-                if (todyaPeroidEnable[i] == 1)
-                {
-                    count++;
-                }
+                TodayPeriodData[i] = SettingValue.ReadValue_DateSetData[i, SettingValue.ReadValue_TodayType];
+                if (TodayPeriodData[i] == 1) count++;
             }
-
-            int[] todayStartTimeValue = new int[count];
-            int[] todayEndedTimeValue = new int[count];
+            TodayStartTime = new string[count];
+            TodayEndedTime = new string[count];
+            TodayStartTimeValue = new int[count];
+            TodayEndedTimeValue = new int[count];
             count = 0;
             for (int i = 0; i < SettingValue.MAX_PERIOD; i++)
             {
-                if (todyaPeroidEnable[i] == 1)
+                if (TodayPeriodData[i] == 1)
                 {
-                    todayStartTimeValue[count] = StartTimeValue[i];
-                    todayEndedTimeValue[count] = EndedTimeValue[i];
+                    TodayStartTime[count] = SettingValue.ReadValue_StartTime[i];
+                    TodayEndedTime[count] = SettingValue.ReadValue_EndedTime[i];
+                    TodayStartTimeValue[count] = ConvertToSeconds(TodayStartTime[count]);
+                    TodayEndedTimeValue[count] = ConvertToSeconds(TodayEndedTime[count]);
                     count++;
                 }
             }
-            string[] todayStartTime = new string[count];
-            string[] todayEndedTime = new string[count];
+
+            TodayLeftTimeValue = new int[count];
             for (int i = 0; i < count; i++)
-            {
-                todayStartTime[i] = ConvertToReturnTime(todayStartTimeValue[i]);
-                todayEndedTime[i] = ConvertToReturnTime(todayEndedTimeValue[i]);
-            }
+                TodayLeftTimeValue[i] = TodayStartTimeValue[i] - SettingValue.LEFT_DISPLAY_TIME;
 
-            int nowPeriodNumber = CheckPeriodNumber(dt, todayStartTimeValue, todayEndedTimeValue);
+            TodayNowPeriod = CheckPeriodNumber(NowTimeRaw, TodayStartTimeValue, TodayEndedTimeValue);
+            TodayNowLeftPeriod = CheckPeriodNumber(NowTimeRaw, TodayLeftTimeValue, TodayStartTimeValue);
 
-            int[] todayLeftTimeValue = new int[count];
-
-            for (int i = 0; i < count; i++)
-            {
-                todayLeftTimeValue[i] = todayStartTimeValue[i] - 600;
-            }
-
-            int todayPeriodLeftNumber = CheckPeriodNumber(dt, todayLeftTimeValue, todayStartTimeValue);
-
-            if (PeriodNumber != -1 && nowPeriodNumber != -1)
+            if (NowTimePeriod != -1 && TodayNowPeriod != -1)
             {
                 //授業時間中
-                progSet[0] = todayStartTimeValue[nowPeriodNumber];
-                progSet[1] = todayEndedTimeValue[nowPeriodNumber];
-                progSet[2] = ConvertedSeconds;
-                plogColor[0] = Color.Black;
-                plogColor[1] = Color.Red;
-                ButtomLabelText[0] = todayStartTime[nowPeriodNumber];
-                ButtomLabelText[1] = todayEndedTime[nowPeriodNumber];
-                ButtomLabelText[2] = ConvertToReturnTime(todayEndedTimeValue[nowPeriodNumber] - ConvertedSeconds);
-                StatusLabelStr = "During the " + (PeriodNumber + 1).ToString() + " time period class!";
+                SettingProgressBar[0] = TodayStartTimeValue[TodayNowPeriod];
+                SettingProgressBar[1] = TodayEndedTimeValue[TodayNowPeriod];
+                SettingProgressBar[2] = NowTimeSeconds;
+                SettingProgressBarColor[0] = SettingValue.BAR_BACK_COLOR_INTIME;
+                SettingProgressBarColor[1] = SettingValue.BAR_FRONT_COLOR_INTIME;
+                SettingButtomText[0] = TodayStartTime[TodayNowPeriod];
+                SettingButtomText[1] = TodayEndedTime[TodayNowPeriod];
+                SettingButtomText[2] = ConvertToReturnTime(TodayEndedTimeValue[TodayNowPeriod] - NowTimeSeconds);
+                SettingFrontText = "During the " + (NowTimePeriod + 1).ToString() + " time period class!";
             }
             else
             {
-                if (todayPeriodLeftNumber != -1)
+                if (TodayNowLeftPeriod != -1)
                 {
                     //授業まであと何分
-                    int i = todayLeftTimeValue[todayPeriodLeftNumber];
-                    string str = ConvertToReturnTime(todayStartTimeValue[todayPeriodLeftNumber] - ConvertedSeconds);
-                    progSet[0] = todayLeftTimeValue[todayPeriodLeftNumber];
-                    progSet[1] = todayStartTimeValue[todayPeriodLeftNumber];
-                    progSet[2] = ConvertedSeconds;
-                    plogColor[0] = Color.Black;
-                    plogColor[1] = Color.Yellow;
-                    ButtomLabelText[0] = ConvertToReturnTime(i);
-                    ButtomLabelText[1] = todayStartTime[todayPeriodLeftNumber];
-                    ButtomLabelText[2] = str;
-                    StatusLabelStr = str.Remove(0,3) + " times left for start class!";
+                    string RemainingTime = ConvertToReturnTime(TodayStartTimeValue[TodayNowLeftPeriod] - NowTimeSeconds);
+                    SettingProgressBar[0] = TodayLeftTimeValue[TodayNowLeftPeriod];
+                    SettingProgressBar[1] = TodayStartTimeValue[TodayNowLeftPeriod];
+                    SettingProgressBar[2] = NowTimeSeconds;
+                    SettingProgressBarColor[0] = SettingValue.BAR_BACK_COLOR_LEFTTIME;
+                    SettingProgressBarColor[1] = SettingValue.BAR_FRONT_COLOR_LEFTTIME;
+                    SettingButtomText[0] = ConvertToReturnTime(TodayLeftTimeValue[TodayNowLeftPeriod]);
+                    SettingButtomText[1] = TodayStartTime[TodayNowLeftPeriod];
+                    SettingButtomText[2] = RemainingTime;
+                    SettingFrontText = RemainingTime.Remove(0,3) + " times left for start class!";
                 }
                 else
                 {
                     //授業時間外
-                    progSet[0] = 0;
-                    progSet[1] = 0;
-                    progSet[2] = 0;
-                    plogColor[0] = Color.Blue;
-                    plogColor[1] = Color.Red;
-                    for (int i = 0; i < ButtomLabelText.Length; i++)
-                        ButtomLabelText[i] = string.Empty;
-                    StatusLabelStr = "Time without class!";
+                    SettingProgressBar[0] = 0;
+                    SettingProgressBar[1] = 0;
+                    SettingProgressBar[2] = 0;
+                    SettingProgressBarColor[0] = SettingValue.BAR_BACK_COLOR_OUTTIME;
+                    SettingProgressBarColor[1] = SettingValue.BAR_FRONT_COLOR_OUTTIME;
+                    SettingFrontText = "Time without class!";
+                    for (int i = 0; i < SettingButtomText.Length; i++) 
+                        SettingButtomText[i] = string.Empty;
                 }
                 
             }
             //Formに反映
-            progressBar1.Minimum = progSet[0];
-            progressBar1.Maximum = progSet[1];
-            progressBar1.Value = progSet[2];
-            progressBar1.BackColor = plogColor[0];
-            progressBar1.ForeColor = plogColor[1];
-            NowTimeStatusLabel.Text = StatusLabelStr;
-            NowTimeFormLabel.Text = dtstr;
-            StartTimeLabel.Text = ButtomLabelText[0];
-            EndedTimeLabel.Text = ButtomLabelText[1];
-            leftTimeLabel.Text = ButtomLabelText[2];
+            progressBar1.Minimum = SettingProgressBar[0];
+            progressBar1.Maximum = SettingProgressBar[1];
+            progressBar1.Value = SettingProgressBar[2];
+            progressBar1.BackColor = SettingProgressBarColor[0];
+            progressBar1.ForeColor = SettingProgressBarColor[1];
+            NowTimeStatusLabel.Text = SettingFrontText;
+            NowTimeFormLabel.Text = NowTimeString;
+            StartTimeLabel.Text = SettingButtomText[0];
+            EndedTimeLabel.Text = SettingButtomText[1];
+            leftTimeLabel.Text = SettingButtomText[2];
         }
 
         /// <summary>
-        /// From1の使用変数の設定
-        /// </summary>
-        public static void HereSetting()
-        {
-            //値に変換するときに使う配列の初期化
-            StartTimeValue = new int[SettingValue.MaxTimetable];
-            EndedTimeValue = new int[SettingValue.MaxTimetable];
-
-            //文字列表記の時間を秒数に直してValueつき配列に格納
-            for (int i = 0; i < SettingValue.MaxTimetable; i++)
-            {
-                int j = ConvertToSeconds(SettingValue.StartTime[i]);
-                StartTimeValue[i] = j;
-                EndedTimeValue[i] = ConvertToSeconds(SettingValue.EndedTime[i]);
-            }
-        }
-
-        /// <summary>
-        /// strから秒に変換するメソッド
-        /// 
+        /// "00:00:00"から秒に変換
         /// </summary>
         /// <param 00:00:00の形式で入力="str"></param>
         /// <returns></returns>
@@ -230,29 +189,6 @@ namespace LectureTime
                 allTime += int.Parse(rawTime[i]) * (i == 2 ? 1 : Math.Pow(60, 2 - i));
             return (int)allTime;
         }
-
-        /// <summary>
-        /// 時間割の時限を出すメソッド
-        /// </summary>
-        /// <param 今の時間="dt"></param>
-        /// <param 判定初めの時間="s"></param>
-        /// <param 判定終わりの時間="e"></param>
-        /// <returns></returns>
-        public int CheckPeriodNumber(DateTime dt, int[] s, int[] e)
-        {
-            int buf = -1;
-            for (int i = 0; i < s.Length; i++)
-            {
-                int j = ConvertToSeconds(dt.ToString(SettingValue.DATE_ENCODING));
-                if (s[i] <= j && j <= e[i])
-                {
-                    buf = i;
-                    break;
-                }
-            }
-            return buf;
-        }
-
         /// <summary>
         /// 秒時間を00:00:00形式に戻す
         /// </summary>
@@ -263,30 +199,26 @@ namespace LectureTime
             TimeSpan span = new TimeSpan(0, 0, time);
             return span.ToString(@"hh\:mm\:ss");
         }
-
         /// <summary>
-        /// 新しいデータファイルを作る
+        /// 時間割の時限を返すメソッド
         /// </summary>
-        public static void MakeFile()
-        {
-            using (var sr = new StreamWriter(SettingValue.DATA_FILE_PATH, false, SettingValue.ENCODING))
-            {
-                sr.WriteLine(DefaultData.READ_FILE);
-            }
-        }
-
-        /// <summary>
-        /// 既存のデータファイルを読み込む
-        /// </summary>
+        /// <param 今の時間="dt"></param>
+        /// <param 判定初めの時間="s"></param>
+        /// <param 判定終わりの時間="e"></param>
         /// <returns></returns>
-        public static string ReadFile()
+        public int CheckPeriodNumber(DateTime dt, int[] s, int[] e)
         {
-            string DataFileData;
-            using (var sr = new StreamReader(SettingValue.DATA_FILE_PATH))
+            int count = -1, Leng = (s.Length + e.Length) / 2;
+            for (int i = 0; i < Leng; i++)
             {
-                DataFileData = sr.ReadToEnd();
+                int j = ConvertToSeconds(dt.ToString(SettingValue.DATE_ENCODING));
+                if (s[i] <= j && j <= e[i])
+                {
+                    count = i;
+                    break;
+                }
             }
-            return DataFileData;
+            return count;
         }
     }
 }
