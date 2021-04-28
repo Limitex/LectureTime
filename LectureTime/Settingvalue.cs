@@ -21,7 +21,7 @@ namespace LectureTime
         public static readonly Color BAR_FRONT_COLOR_OUTTIME = Color.Blue;
         public static readonly Color BAR_BACK_COLOR_INTIME = Color.Black;
         public static readonly Color BAR_BACK_COLOR_LEFTTIME = Color.Black;
-        public static readonly Color BAR_BACK_COLOR_OUTTIME = Color.Black;
+        public static readonly Color BAR_BACK_COLOR_OUTTIME = Color.Blue;
         public static readonly Encoding ENCODING = Encoding.GetEncoding("UTF-8");
 
         public static int      ReadValue_MaxTimeTable = -1;

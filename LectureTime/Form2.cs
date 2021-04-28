@@ -253,7 +253,7 @@ namespace LectureTime
                 var j = check[0];
                 for (int i = 1; i < MaxPeriodSum; i++)
                 {
-                    if (j >= check[i] - 1)
+                    if (j >= check[i] - 10)
                     {
                         MessageBox.Show("Set the time in ascending order. and leave at least 10 seconds", 
                             "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);

@@ -8,3 +8,4 @@ D:\Documents\GitHub\LectureTime\LectureTime\obj\Release\LectureTime.csproj.Gener
 D:\Documents\GitHub\LectureTime\LectureTime\obj\Release\LectureTime.csproj.CoreCompileInputs.cache
 D:\Documents\GitHub\LectureTime\LectureTime\obj\Release\LectureTime.exe
 D:\Documents\GitHub\LectureTime\LectureTime\obj\Release\LectureTime.pdb
+D:\Documents\GitHub\LectureTime\LectureTime\obj\Release\LectureTime.csprojAssemblyReference.cache
