@@ -22,10 +22,8 @@ namespace LectureTime
         //プログラムで使う変数類
         public static int[] StartTimeValue;
         public static int[] EndedTimeValue;
-        //public static int[] LeftTimeValue;
 
         int PeriodNumber = -1;
-        //int PeriodLeftNumber = -1;
         Thread eventHandleThread;
         delegate void d();
 
@@ -142,11 +140,6 @@ namespace LectureTime
             }
 
             int todayPeriodLeftNumber = CheckPeriodNumber(dt, todayLeftTimeValue, todayStartTimeValue);
-            //途中 優先順位３番目
-
-            //たぶん↓
-            //PeriodNumberと最初宣言した時限データで授業があるか調べる
-            //あった場合は授業時間に普通処理、それ以外に一戸前の時間と比べて授業がある場合はあと何分を表示する
 
             if (PeriodNumber != -1 && nowPeriodNumber != -1)
             {
@@ -213,7 +206,6 @@ namespace LectureTime
             //値に変換するときに使う配列の初期化
             StartTimeValue = new int[SettingValue.MaxTimetable];
             EndedTimeValue = new int[SettingValue.MaxTimetable];
-            //LeftTimeValue = new int[SettingValue.MaxTimetable];
 
             //文字列表記の時間を秒数に直してValueつき配列に格納
             for (int i = 0; i < SettingValue.MaxTimetable; i++)
@@ -221,7 +213,6 @@ namespace LectureTime
                 int j = ConvertToSeconds(SettingValue.StartTime[i]);
                 StartTimeValue[i] = j;
                 EndedTimeValue[i] = ConvertToSeconds(SettingValue.EndedTime[i]);
-                //LeftTimeValue[i] = j - 600;
             }
         }
 

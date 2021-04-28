@@ -314,9 +314,6 @@ namespace LectureTime
                     }
                     saveData += buf;
                 }
-
-                MessageBox.Show(saveData);
-
             }//ファイル書き出せる形に成形
 
 
