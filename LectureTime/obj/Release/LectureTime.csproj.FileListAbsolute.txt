@@ -1,11 +1,10 @@
 C:\Users\keigo\Documents\GitHub\LectureTime\LectureTime\bin\Release\LectureTime.exe.config
 C:\Users\keigo\Documents\GitHub\LectureTime\LectureTime\bin\Release\LectureTime.exe
 C:\Users\keigo\Documents\GitHub\LectureTime\LectureTime\bin\Release\LectureTime.pdb
-C:\Users\keigo\Documents\GitHub\LectureTime\LectureTime\obj\Release\LectureTime.csprojAssemblyReference.cache
 C:\Users\keigo\Documents\GitHub\LectureTime\LectureTime\obj\Release\LectureTime.Form1.resources
+C:\Users\keigo\Documents\GitHub\LectureTime\LectureTime\obj\Release\LectureTime.Form2.resources
 C:\Users\keigo\Documents\GitHub\LectureTime\LectureTime\obj\Release\LectureTime.Properties.Resources.resources
 C:\Users\keigo\Documents\GitHub\LectureTime\LectureTime\obj\Release\LectureTime.csproj.GenerateResource.cache
 C:\Users\keigo\Documents\GitHub\LectureTime\LectureTime\obj\Release\LectureTime.csproj.CoreCompileInputs.cache
 C:\Users\keigo\Documents\GitHub\LectureTime\LectureTime\obj\Release\LectureTime.exe
 C:\Users\keigo\Documents\GitHub\LectureTime\LectureTime\obj\Release\LectureTime.pdb
-C:\Users\keigo\Documents\GitHub\LectureTime\LectureTime\obj\Release\LectureTime.Form2.resources
